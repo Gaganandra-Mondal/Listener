@@ -3,14 +3,15 @@ import SideBarLeft from "./components/SideBarLeft";
 import MainContent from "./components/MainContent";
 import SideBarRight from "./components/SideBarRight";
 import Footer from "./components/Footer";
+
 const App = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-[#1a1a1a] flex flex-col">
       <NavBar/>
-      <div style={{display:"flex"}}>
-      <SideBarLeft/>
-      <MainContent/>
-      <SideBarRight/>  
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-3 md:p-4">
+        <SideBarLeft/>
+        <MainContent/>
+        <SideBarRight/>  
       </div>
       <Footer/>  
     </div>

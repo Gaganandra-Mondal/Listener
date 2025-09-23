@@ -23,9 +23,9 @@ const MainContent = () => {
   ];
 
   return (
-    <main className="flex-1 bg-[#252525] border border-white/5 rounded-xl shadow-md p-6 overflow-y-auto">
+    <main className="flex-1 bg-[#252525] border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]">
       {/* Outlet */}
-      <div className="mb-6 relative bg-white/5 border-l-4 border-red-600 rounded-md p-4 italic text-white">
+      <div className="mb-6 relative bg-white/5 border-l-4 border-red-600 rounded-md p-4 italic text-white text-sm md:text-base">
         Dynamic Outlet Component - Now Playing: Midnight Symphony
         <span className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-bl-md">
           LIVE
@@ -33,11 +33,11 @@ const MainContent = () => {
       </div>
 
       {/* Hero Cards */}
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map((card, i) => (
           <div
             key={i}
-            className="relative h-72 rounded-xl overflow-hidden shadow-md group border border-white/5 bg-[#1e1e1e] cursor-pointer transform transition hover:-translate-y-2 hover:shadow-xl"
+            className="relative h-64 sm:h-72 rounded-xl overflow-hidden shadow-md group border border-white/5 bg-[#1e1e1e] cursor-pointer transform transition hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl"
             style={{
               backgroundImage: `url(${card.img})`,
               backgroundSize: "cover",
@@ -48,14 +48,14 @@ const MainContent = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
 
             {/* Badge */}
-            <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+            <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 sm:px-3 sm:py-1 rounded-full">
               {card.badge}
             </div>
 
             {/* Content */}
             <div className="absolute bottom-4 left-4 text-white z-10">
-              <h3 className="text-lg font-semibold">{card.title}</h3>
-              <p className="text-gray-300 text-sm">{card.desc}</p>
+              <h3 className="text-base sm:text-lg font-semibold">{card.title}</h3>
+              <p className="text-gray-300 text-xs sm:text-sm">{card.desc}</p>
             </div>
           </div>
         ))}
