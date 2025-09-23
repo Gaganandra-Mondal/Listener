@@ -3,6 +3,7 @@ import SideBarLeft from "./components/SideBarLeft";
 import MainContent from "./components/MainContent";
 import SideBarRight from "./components/SideBarRight";
 import Footer from "./components/Footer";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
@@ -10,7 +11,7 @@ const App = () => {
       <NavBar/>
       <div className="flex-1 flex flex-col lg:flex-row gap-4 p-3 md:p-4">
         <SideBarLeft/>
-        <MainContent/>
+        <Outlet/>
         <SideBarRight/>  
       </div>
       <Footer/>  

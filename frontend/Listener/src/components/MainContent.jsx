@@ -53,7 +53,7 @@ const MainContent = () => {
             </div>
 
             {/* Content */}
-            <div className="absolute bottom-4 left-4 text-white z-10">
+            <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-base sm:text-lg font-semibold">{card.title}</h3>
               <p className="text-gray-300 text-xs sm:text-sm">{card.desc}</p>
             </div>

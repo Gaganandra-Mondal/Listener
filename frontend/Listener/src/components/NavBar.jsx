@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HiMenu, HiX, HiSearch } from "react-icons/hi";
-
+import { Link } from "react-router-dom"
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -15,7 +15,7 @@ const NavBar = () => {
 
       {/* Desktop Links */}
       <div className="hidden md:flex gap-4 lg:gap-6">
-        {["Discover", "Library", "Playlists", "Radio"].map((link) => (
+        {/* {["Discover", "Library", "Playlists", "Radio"].map((link) => (
           <a
             key={link}
             href="#"
@@ -24,7 +24,12 @@ const NavBar = () => {
             {link}
             <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full" />
           </a>
-        ))}
+        ))} */}
+        <Link to="/">Home</Link>
+        <Link to="/discover">Discover</Link>
+        <Link to="/library">Library</Link>
+        <Link to="/playlist">Playlist</Link>
+        <Link to="/radio">Radio</Link>
       </div>
 
       {/* Search + User */}
