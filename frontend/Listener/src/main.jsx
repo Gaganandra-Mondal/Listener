@@ -4,7 +4,6 @@ import App from './App.jsx'
 import Discover from './components/Discover.jsx'
 import Library from './components/Library.jsx'
 import PlayLists from './components/PlayLists.jsx'
-import Radio from './components/Radio.jsx'
 import MainContent from './components/MainContent.jsx'
   const router = createBrowserRouter([{
     path:"/",
@@ -25,10 +24,6 @@ import MainContent from './components/MainContent.jsx'
       {
         path:"playlist",
         element:<PlayLists/>
-      },
-      {
-        path:"radio",
-        element:<Radio/>
       },      
     ]
   }]);

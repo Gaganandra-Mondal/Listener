@@ -23,7 +23,7 @@ const MainContent = () => {
   ];
 
   return (
-    <main className="flex-1 bg-[#252525] border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]">
+    <main className="flex-1 bg-[#202020] border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]">
       {/* Outlet */}
       <div className="mb-6 relative bg-white/5 border-l-4 border-red-600 rounded-md p-4 italic text-white text-sm md:text-base">
         Dynamic Outlet Component - Now Playing: Midnight Symphony

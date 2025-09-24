@@ -1,35 +1,42 @@
 import React, { useState } from "react";
 import { HiMenu, HiX, HiSearch } from "react-icons/hi";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const styles = {
+    link: "relative text-gray-400 hover:text-white transition duration-300 group px-2 py-1",
+    underline:
+      "absolute left-0 bottom-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full",
+  };
 
   return (
     <nav className="bg-[#1e1e1e]/90 backdrop-blur-md border border-white/5 rounded-xl shadow-md px-4 py-3 md:px-6 md:py-3 flex items-center justify-between sticky top-3 z-50 mx-3 md:mx-4 mt-3">
       {/* Logo */}
       <div className="flex items-center gap-2 text-white font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5">
-        <span className="text-red-600 text-xl md:text-2xl">♫</span> 
-        <span className="hidden sm:inline">Harmony</span>
+        <span className="text-red-600 text-xl md:text-2xl">♫</span>
+        <span className="hidden sm:inline">Listener</span>
       </div>
 
       {/* Desktop Links */}
       <div className="hidden md:flex gap-4 lg:gap-6">
-        {/* {["Discover", "Library", "Playlists", "Radio"].map((link) => (
-          <a
-            key={link}
-            href="#"
-            className="relative text-gray-400 hover:text-white transition duration-300 group px-2 py-1"
-          >
-            {link}
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full" />
-          </a>
-        ))} */}
-        <Link to="/">Home</Link>
-        <Link to="/discover">Discover</Link>
-        <Link to="/library">Library</Link>
-        <Link to="/playlist">Playlist</Link>
-        <Link to="/radio">Radio</Link>
+
+        <Link to="/" className={styles.link}>
+          Home
+          <span className={styles.underline}></span>
+        </Link>
+        <Link to="/discover" className={styles.link}>
+          Discover
+          <span className={styles.underline}></span>
+        </Link>
+        <Link to="/library" className={styles.link}>
+          Library
+          <span className={styles.underline}></span>
+        </Link>
+        <Link to="/playlist" className={styles.link}>
+          Playlist
+          <span className={styles.underline}></span>
+        </Link>
       </div>
 
       {/* Search + User */}
@@ -50,7 +57,7 @@ const NavBar = () => {
       {/* Mobile Search & Menu */}
       <div className="flex items-center gap-3 md:hidden">
         {/* Mobile Search Button */}
-        <button 
+        <button
           onClick={() => setSearchOpen(!searchOpen)}
           className="text-white p-2"
         >
