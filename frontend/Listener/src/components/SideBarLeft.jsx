@@ -19,14 +19,20 @@ const SideBarLeft = () => {
         className="lg:hidden flex items-center gap-2 text-white bg-red-600 px-4 py-3 rounded-lg mb-3 w-full justify-center"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? <HiX className="text-xl" /> : <HiMenuAlt2 className="text-xl" />} 
+        {isOpen ? (
+          <HiX className="text-xl" />
+        ) : (
+          <HiMenuAlt2 className="text-xl" />
+        )}
         Filters
       </button>
 
       {/* Sidebar Content */}
       <div
-        className={`bg-[#252525] border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
-        ${isOpen ? "block absolute left-3 right-3 z-40" : "hidden"} lg:block lg:relative lg:left-0 lg:right-0`}
+        className={`bg-[#111111] border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
+        ${
+          isOpen ? "block absolute left-3 right-3 z-40" : "hidden"
+        } lg:block lg:relative lg:left-0 lg:right-0`}
       >
         {/* Close button for mobile */}
         {isOpen && (
@@ -58,7 +64,7 @@ const SideBarLeft = () => {
 
       {/* Overlay for mobile */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-30 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
