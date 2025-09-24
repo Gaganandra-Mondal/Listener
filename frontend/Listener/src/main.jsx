@@ -5,6 +5,8 @@ import Discover from "./components/Discover.jsx";
 import Library from "./components/Library.jsx";
 import PlayLists from "./components/PlayLists.jsx";
 import MainContent from "./components/MainContent.jsx";
+import Profile from "./components/Profile.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "playlist",
         element: <PlayLists />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

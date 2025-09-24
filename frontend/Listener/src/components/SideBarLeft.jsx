@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiMenuAlt2, HiX } from "react-icons/hi";
 
 const SideBarLeft = () => {
@@ -29,7 +29,7 @@ const SideBarLeft = () => {
 
       {/* Sidebar Content */}
       <div
-        className={`bg-[#111111] border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
+        className={`bg-[#ffffff] text-black border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
         ${
           isOpen ? "block absolute left-3 right-3 z-40" : "hidden"
         } lg:block lg:relative lg:left-0 lg:right-0`}
@@ -53,7 +53,7 @@ const SideBarLeft = () => {
           {filters.map((item, i) => (
             <button
               key={i}
-              className="bg-white/5 text-gray-400 px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-white hover:bg-white/10 text-left"
+              className="bg-white/5 text-gray-400 px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-black/90 hover:bg-white/10 text-left"
               onClick={() => setIsOpen(false)}
             >
               {item}
