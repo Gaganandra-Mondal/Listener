@@ -11,6 +11,10 @@ import logoutHanlder from "../controllers/logoutHandler.js";
 import userHanlder from "../controllers/userHandler.js";
 import singerHanlder from "../controllers/singerHandler.js";
 
+import singerRegisterHanlder from "../controllers/singerRegisterHandler.js";
+import singerLoginHandler from "../controllers/singerLoginHandler.js";
+import singerLogoutHandler from "../controllers/singerLogoutHandler.js";
+
 const router = Router();
 
 router.route("/").get(homeHandler);
@@ -19,5 +23,8 @@ router.route("/login").post(login);
 router.route("/users").get(verifier, userHanlder);
 router.route("/singers").get(verifier, singerHanlder);
 router.route("/logout").get(verifier, logoutHanlder);
+router.route("/singerLogin").post(singerLoginHandler);
+router.route("/singerRegsiter").get(singerRegisterHanlder);
+router.route("/singerLogout").get(verifier, singerLogoutHandler);
 
 export default router;

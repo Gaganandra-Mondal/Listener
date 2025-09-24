@@ -7,15 +7,15 @@ const NavBar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   const styles = {
-    link: "relative text-gray-400 hover:text-white transition duration-300 group px-2 py-1",
+    link: "relative text-gray-400 hover:text-black/90 transition duration-300 group px-2 py-1",
     underline:
       "absolute left-0 bottom-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full",
   };
 
   return (
-    <nav className="bg-[#111111]/90 backdrop-blur-md border border-white/5 rounded-xl shadow-md px-4 py-3 md:px-6 md:py-3 flex items-center justify-between sticky top-3 z-50 mx-3 md:mx-4 mt-3">
+    <nav className="bg-[#ffffff] text-black backdrop-blur-md border border-white/5 rounded-xl shadow-md px-4 py-3 md:px-6 md:py-3 flex items-center justify-between sticky top-3 z-50 mx-3 md:mx-4 mt-3">
       {/* Logo */}
-      <div className="flex items-center gap-2 text-white font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5">
+      <div className="flex items-center gap-2 text-black/70 font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5">
         <span className="text-red-600 sm:text-lg md:text-2xl">♫</span>
         <span className=" md:text-2xl sm:inline sm:text-lg">Listener</span>
       </div>
@@ -53,9 +53,11 @@ const NavBar = () => {
           />
           <HiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         </div>
-        <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition">
-          U
-        </div>
+        <Link to="/profile">
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition">
+            U
+          </div>
+        </Link>
       </div>
 
       {/* Mobile Search & Menu */}
@@ -104,7 +106,9 @@ const NavBar = () => {
               className="text-gray-300 hover:text-red-500 transition text-lg font-medium"
               onClick={() => setIsOpen(false)}
             >
-              {(link === "/") ? "Home" : link.slice(1).charAt(0).toUpperCase() + link.slice(2)}
+              {link === "/"
+                ? "Home"
+                : link.slice(1).charAt(0).toUpperCase() + link.slice(2)}
             </Link>
           ))}
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer">
