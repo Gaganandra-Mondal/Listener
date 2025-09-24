@@ -23,7 +23,7 @@ const MainContent = () => {
   ];
 
   return (
-    <main className="flex-1 bg-[#202020] border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]">
+    <main className="flex-1 bg-[#111111] border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]">
       {/* Outlet */}
       <div className="mb-6 relative bg-white/5 border-l-4 border-red-600 rounded-md p-4 italic text-white text-sm md:text-base">
         Dynamic Outlet Component - Now Playing: Midnight Symphony
@@ -54,7 +54,9 @@ const MainContent = () => {
 
             {/* Content */}
             <div className="absolute bottom-4 left-4 text-white">
-              <h3 className="text-base sm:text-lg font-semibold">{card.title}</h3>
+              <h3 className="text-base sm:text-lg font-semibold">
+                {card.title}
+              </h3>
               <p className="text-gray-300 text-xs sm:text-sm">{card.desc}</p>
             </div>
           </div>
