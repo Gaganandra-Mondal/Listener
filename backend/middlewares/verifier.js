@@ -10,7 +10,7 @@ const verifier = async (req, res, next) => {
         } else {
             // console.log(token);
             token = jwt.verify(token, secret);
-            req.userID = token;
+            req.userID = token.id;
             next();
         }
     } catch (err) {
