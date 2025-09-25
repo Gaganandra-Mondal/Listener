@@ -46,7 +46,7 @@ const NavBar = () => {
           <input
             type="text"
             placeholder="Search..."
-            className="bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white placeholder-gray-400 
+            className="bg-white/10 border border-white/10 rounded-full px-4 py-2 text-black placeholder-gray-400 
                        focus:outline-none focus:border-red-600 
                        w-40 lg:w-44 xl:w-60 focus:w-72 
                        transition-all duration-300"
