@@ -23,8 +23,8 @@ router.route("/login").post(login);
 router.route("/users").get(verifier, userHanlder);
 router.route("/singers").get(verifier, singerHanlder);
 router.route("/logout").get(verifier, logoutHanlder);
+router.route("/singerRegister").post(singerRegisterHanlder);
 router.route("/singerLogin").post(singerLoginHandler);
-router.route("/singerRegsiter").get(singerRegisterHanlder);
 router.route("/singerLogout").get(verifier, singerLogoutHandler);
 
 export default router;
