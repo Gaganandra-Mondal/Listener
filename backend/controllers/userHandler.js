@@ -1,5 +1,5 @@
-import pool from "../db.js"
-import erroHandler from "../error.js"
+import pool from "../db.js";
+import erroHandler from "../error.js";
 
 const userHanlder = async (req, res) => {
     try {
