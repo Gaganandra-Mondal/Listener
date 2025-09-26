@@ -4,9 +4,7 @@ import { HiMenuAlt3, HiX } from "react-icons/hi";
 const SideBarRight = () => {
   const sections = [
     "Top Tracks",
-    "Viral Hits",
     "New Releases",
-    "Charts",
     "Recommended",
   ];
   const [isOpen, setIsOpen] = useState(false);

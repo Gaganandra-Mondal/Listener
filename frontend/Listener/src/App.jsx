@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-[#f4f4f4] text-black flex flex-col">
+    <div className="min-h-screen bg-[#ffffff] text-black flex flex-col">
       <NavBar />
       <div className="flex-1 flex flex-col lg:flex-row gap-4 p-3 md:p-4">
         <SideBarLeft />
