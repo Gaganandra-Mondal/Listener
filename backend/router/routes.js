@@ -21,6 +21,7 @@ import dislikeHandler from "../controllers/dislikeHandler.js";
 
 import followHandler from "../controllers/followHandler.js";
 import unfollowHandler from "../controllers/unfollowHandler.js";
+import recomendedHandler from "../controllers/recomendedHandler.js";
 
 const router = Router();
 
@@ -43,5 +44,6 @@ router.route("/dislikes/:id").post(verifier, dislikeHandler);
 
 router.route("/follows/:id").post(verifier, followHandler);
 router.route("/unfollows/:id").post(verifier, unfollowHandler);
+router.route("/recomended").get(verifier, recomendedHandler);
 
 export default router;

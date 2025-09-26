@@ -1,3 +1,6 @@
+import pool from "../db.js";
+import erroHandler from "../error.js";
+
 const dislikeHandler = async (req, res) => {
     try {
         const uid = req.userID;
