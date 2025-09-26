@@ -6,6 +6,14 @@ import Library from "./components/Library.jsx";
 import PlayLists from "./components/PlayLists.jsx";
 import MainContent from "./components/MainContent.jsx";
 import Profile from "./components/Profile.jsx";
+import Trending from "./components/Trending.jsx";
+import NewReleases from "./components/NewReleases.jsx";
+import Recommendation from "./components/Recommendation.jsx";
+import Auth from "./components/Auth.jsx";
+import UserLogin from "./components/UserLogin.jsx";
+import UserRegister from "./components/UserRegister.jsx";
+import SingerLogin from "./components/SingerLogin.jsx";
+import SingerRegister from "./components/SingerRegister.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +40,39 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
+      {
+        path: "trending",
+        element: <Trending />,
+      },
+      {
+        path: "newreleases",
+        element: <NewReleases />,
+      },
+      {
+        path: "recommendation",
+        element: <Recommendation />,
+      },
+      {
+        path: "auth",
+        element: <Auth />,
+      },
     ],
+  },
+  {
+    path: "userlogin",
+    element: <UserLogin />,
+  },
+  {
+    path: "userregister",
+    element: <UserRegister />,
+  },
+  {
+    path: "singerlogin",
+    element: <SingerLogin />,
+  },
+  {
+    path: "singerregister",
+    element: <SingerRegister />,
   },
 ]);
 createRoot(document.getElementById("root")).render(
