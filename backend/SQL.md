@@ -160,3 +160,25 @@ Kyun hona hi hai' ,
 
 '338' , 'Romantic' , '2025-09-23'
 );
+
+---
+# Music Recommendation Logic 
+### Query : 
+SELECT s.id, s.name, s.url, s.lyrics, s.duration, s.genre, s.uploaded_on   
+FROM songs s
+JOIN followers f    
+ON s.aid = f.aid
+WHERE f.uid = $1   
+  AND s.id NOT IN (
+    SELECT lm.sid 
+    FROM liked_music lm 
+    WHERE lm.uid = $1
+  )   
+ORDER BY s.uploaded_on DESC;   
+
+### Logic :    
+1. User Follows Some Artists...
+2. User Likes Some Music from Any Artists...
+3. We Recommend Those Songs Which Are Not Yet Liked By The User And Created By The Followed Artist To The User...
+---
+
