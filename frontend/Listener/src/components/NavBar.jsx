@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { HiMenu, HiX, HiSearch } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [session, setSession] = useState(true);
+  const [theme, setTheme] = useState(false);
 
   const styles = {
-    link: "relative text-gray-400 hover:text-black/90 transition duration-300 group px-2 py-1",
+    link: "relative hover:text-black/90 transition duration-300 group px-2 py-1",
     underline:
       "absolute left-0 bottom-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full",
   };
@@ -23,22 +25,42 @@ const NavBar = () => {
 
       {/* Desktop Links */}
       <div className="hidden md:flex gap-4 lg:gap-6">
-        <Link to="/" className={styles.link}>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `${styles.link} ${isActive ? "text-black/90" : "text-gray-400"}`
+          }
+        >
           Home
           <span className={styles.underline}></span>
-        </Link>
-        <Link to="/discover" className={styles.link}>
+        </NavLink>
+        <NavLink
+          to="/discover"
+          className={({ isActive }) =>
+            `${styles.link} ${isActive ? "text-black/90" : "text-gray-400"}`
+          }
+        >
           Discover
           <span className={styles.underline}></span>
-        </Link>
-        <Link to="/library" className={styles.link}>
+        </NavLink>
+        <NavLink
+          to="/library"
+          className={({ isActive }) =>
+            `${styles.link} ${isActive ? "text-black/90" : "text-gray-400"}`
+          }
+        >
           Library
           <span className={styles.underline}></span>
-        </Link>
-        <Link to="/playlist" className={styles.link}>
+        </NavLink>
+        <NavLink
+          to="/playlist"
+          className={({ isActive }) =>
+            `${styles.link} ${isActive ? "text-black/90" : "text-gray-400"}`
+          }
+        >
           Playlist
           <span className={styles.underline}></span>
-        </Link>
+        </NavLink>
       </div>
 
       {/* Search + User (Desktop) */}
@@ -54,6 +76,18 @@ const NavBar = () => {
           />
           <HiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         </div>
+        <button
+          className="cursor-pointer"
+          onClick={() => {
+            setTheme(!theme);
+          }}
+        >
+          {theme ? (
+            <FaSun className="w-5 h-5" />
+          ) : (
+            <FaMoon className="w-5 h-5" />
+          )}
+        </button>
         {session ? (
           <Link to="/profile">
             <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition">
@@ -61,7 +95,7 @@ const NavBar = () => {
             </div>
           </Link>
         ) : (
-          <Link>Login</Link>
+          <Link to="/auth">Login</Link>
         )}
       </div>
 
@@ -76,6 +110,19 @@ const NavBar = () => {
         </button>
 
         {/* Mobile Hamburger */}
+        <button
+          className="cursor-pointer"
+          onClick={() => {
+            setTheme(!theme);
+          }}
+        >
+          {theme ? (
+            <FaSun className="w-4 h-4" />
+          ) : (
+            <FaMoon className="w-4 h-4" />
+          )}
+        </button>
+
         <button
           className="text-black text-xl"
           onClick={() => setIsOpen(!isOpen)}
@@ -100,11 +147,10 @@ const NavBar = () => {
           </div>
         </div>
       )}
-
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-16 left-3 right-3 bg-[#1e1e1e] border border-white/10 rounded-xl flex flex-col items-center gap-4 py-6 md:hidden z-50">
-          {["/", "/Discover", "/library", "/playlist"].map((link) => (
+          {["/", "/discover", "/library", "/playlist"].map((link) => (
             <Link
               key={link}
               to={link}

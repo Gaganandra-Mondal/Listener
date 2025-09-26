@@ -4,13 +4,7 @@ import { HiMenuAlt2, HiX } from "react-icons/hi";
 const SideBarLeft = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const filters = [
-    "Artists Filter",
-    "Genre Selector",
-    "Mood",
-    "Release Year",
-    "Popularity",
-  ];
+  const filters = [];
 
   return (
     <aside className="lg:w-64">

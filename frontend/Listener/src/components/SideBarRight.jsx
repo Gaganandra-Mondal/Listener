@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const SideBarRight = () => {
-  const sections = [
-    "Top Tracks",
-    "New Releases",
-    "Recommended",
-  ];
+  const sections = ["Top Tracks", "New Releases", "Recommended"];
+  const urls = ["trending", "newreleases", "recommendation"];
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -40,7 +38,6 @@ const SideBarRight = () => {
             <HiX />
           </button>
         )}
-
         <h2 className="text-red-600 text-lg font-semibold uppercase flex items-center gap-2 mb-4 pr-8">
           Trending
           <span className="flex-1 h-px bg-gradient-to-r from-red-600 to-transparent" />
@@ -48,13 +45,14 @@ const SideBarRight = () => {
 
         <div className="flex flex-col gap-2">
           {sections.map((item, idx) => (
-            <button
+            <Link
+              to={urls[idx]}
               key={idx}
               className="bg-white/5 text-gray-400 px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-black/90 hover:bg-white/10 text-left"
               onClick={() => setIsOpen(false)}
             >
               {item}
-            </button>
+            </Link>
           ))}
         </div>
       </div>
