@@ -1,6 +1,20 @@
-import {FaPause, FaPlay, FaForward, FaBackward, FaVolumeOff, FaVolumeUp, FaRandom, FaSync} from "react-icons/fa"
+import {
+  FaPause,
+  FaPlay,
+  FaForward,
+  FaBackward,
+  FaVolumeOff,
+  FaVolumeUp,
+  FaRandom,
+  FaSync,
+} from "react-icons/fa";
+import { useState } from "react";
 
 const Footer = () => {
+  const [control, setControl] = useState(false);
+  function playHandler() {
+    setControl(!control);
+  }
   return (
     <footer className="bg-[#ffffff] text-black border-t border-white/5 rounded-t-xl shadow-inner px-3 py-3 md:px-4 flex flex-col md:flex-row items-center justify-between gap-3 sticky bottom-0">
       {/* Track Info */}
@@ -18,20 +32,22 @@ const Footer = () => {
       <div className="flex text-black flex-col items-center flex-1 w-full md:w-auto order-3 md:order-2">
         <div className="flex items-center gap-2 md:gap-4 mb-1 md:mb-2">
           <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/0 flex items-center justify-center text-black/90 hover:text-black/50 transition text-sm md:text-base">
-           <FaSync />
+            <FaSync />
           </button>
           <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/0 flex items-center justify-center text-black/90 hover:text-black/50 transition text-sm md:text-base">
             <FaBackward />
           </button>
-          <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-500 shadow-md transition text-lg md:text-xl">
-            <FaPause /> 
-            <FaPlay className="hidden" />
+          <button
+            onClick={playHandler}
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-500 shadow-md transition text-lg md:text-xl"
+          >
+            {control ? <FaPause /> : <FaPlay />}
           </button>
           <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/0 flex items-center justify-center text-black/90 hover:text-black/50 transition text-sm md:text-base">
-           <FaForward />
+            <FaForward />
           </button>
           <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/0 flex items-center justify-center text-black/90 hover:text-black/50 transition text-sm md:text-base">
-           <FaRandom />
+            <FaRandom />
           </button>
         </div>
 

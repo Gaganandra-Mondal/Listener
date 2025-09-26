@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [session, setSession] = useState(true);
 
   const styles = {
     link: "relative text-gray-400 hover:text-black/90 transition duration-300 group px-2 py-1",
@@ -53,11 +54,15 @@ const NavBar = () => {
           />
           <HiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         </div>
-        <Link to="/profile">
-          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition">
-            U
-          </div>
-        </Link>
+        {session ? (
+          <Link to="/profile">
+            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition">
+              U
+            </div>
+          </Link>
+        ) : (
+          <Link>Login</Link>
+        )}
       </div>
 
       {/* Mobile Search & Menu */}
@@ -72,7 +77,7 @@ const NavBar = () => {
 
         {/* Mobile Hamburger */}
         <button
-          className="text-white text-xl"
+          className="text-black text-xl"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <HiX /> : <HiMenu />}
