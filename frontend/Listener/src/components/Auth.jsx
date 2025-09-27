@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { FaHeadphones, FaMicrophone } from "react-icons/fa";
+import { useOutletContext } from "react-router-dom";
 
 const Auth = () => {
+  let { background, text, hoverText } = useOutletContext();
   return (
-    <main className="flex-1 bg-[#ffffff] flex gap-20 justify-center items-center border text-red-600 text-2xl border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]">
+    <main
+      className={`flex-1 bg-${background} flex gap-20 justify-center items-center text-red-600 text-2xl rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
+    >
       {/* User Login */}
       <Link
         to="/userlogin"

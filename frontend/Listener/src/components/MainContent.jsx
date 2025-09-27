@@ -1,4 +1,6 @@
+import { useOutletContext } from "react-router-dom";
 const MainContent = () => {
+  let theme = useOutletContext();
   const cards = [
     {
       title: "Card 1",
@@ -21,13 +23,13 @@ const MainContent = () => {
   ];
 
   return (
-    <main className="flex-1 bg-[#ffffff] text-black border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]">
+    <main className={`flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}>
       {/* Hero Cards */}
       <section className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map((card, i) => (
           <div
             key={i}
-            className="relative h-64 sm:h-72 rounded-xl overflow-hidden shadow-md group border border-white/5 bg-[#1e1e1e] cursor-pointer transform transition hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl"
+            className={`relative h-64 sm:h-72 rounded-xl overflow-hidden shadow-md group border border-white/5 bg-${theme.background} cursor-pointer transform transition hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl`}
             style={{
               backgroundImage: `url(${card.img})`,
               backgroundSize: "cover",
