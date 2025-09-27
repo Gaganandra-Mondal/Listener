@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { HiMenuAlt2, HiX } from "react-icons/hi";
 
-const SideBarLeft = () => {
+const SideBarLeft = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const filters = [];
+  const filters = ["deb", "shub", "gagan"];
 
   return (
     <aside className="lg:w-64">
       {/* Mobile Toggle Button */}
       <button
-        className="lg:hidden flex items-center gap-2 text-white bg-red-600 px-4 py-3 rounded-lg mb-3 w-full justify-center"
+        className={`lg:hidden flex items-center gap-2 text-white bg-red-600 px-4 py-3 rounded-lg mb-3 w-full justify-center`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (
@@ -23,7 +23,9 @@ const SideBarLeft = () => {
 
       {/* Sidebar Content */}
       <div
-        className={`bg-[#ffffff] text-black border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
+        className={`bg-${theme.background} text-${
+          theme.text
+        } border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
         ${
           isOpen ? "block absolute left-3 right-3 z-40" : "hidden"
         } lg:block lg:relative lg:left-0 lg:right-0`}
@@ -47,7 +49,7 @@ const SideBarLeft = () => {
           {filters.map((item, i) => (
             <button
               key={i}
-              className="bg-white/5 text-gray-400 px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-black/90 hover:bg-white/10 text-left"
+              className={`text-${theme.text} bg-${theme.background} px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-${theme.hoverText} hover:bg-white/10 text-left`}
               onClick={() => setIsOpen(false)}
             >
               {item}
@@ -59,7 +61,7 @@ const SideBarLeft = () => {
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          className={`fixed inset-0 bg-${theme.background} z-30 lg:hidden`}
           onClick={() => setIsOpen(false)}
         />
       )}
