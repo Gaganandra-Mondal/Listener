@@ -1,4 +1,4 @@
-const errorHanlder = (res) => {
+const errorHandler = (res) => {
     res.status(500).json("Internal Server Error.");
 }
-export default errorHanlder;
+export default errorHandler;
