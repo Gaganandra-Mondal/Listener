@@ -1,7 +1,7 @@
 import pool from "../db.js";
 import erroHandler from "../error.js";
 
-const userHanlder = async (req, res) => {
+const userHandler = async (req, res) => {
     try {
         const id = req.userID;
         // console.log(id);
@@ -17,4 +17,4 @@ const userHanlder = async (req, res) => {
     }
 }
 
-export default userHanlder;
+export default userHandler;

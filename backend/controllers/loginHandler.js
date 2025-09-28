@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import pool from '../db.js';
-import errorHanlder from '../error.js';
+import errorHandler from '../error.js';
 
 const loginHandler = async (req, res) => {
     try {
@@ -25,7 +25,7 @@ const loginHandler = async (req, res) => {
         }
     } catch (err) {
         console.log(err.message);
-        errorHanlder(res);
+        errorHandler(res);
     }
 }
 export default loginHandler;

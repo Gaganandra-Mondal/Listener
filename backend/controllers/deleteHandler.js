@@ -1,5 +1,5 @@
 import pool from '../db.js';
-import errorHanlder from '../error.js';
+import errorHandler from '../error.js';
 
 const deleteHandler = async (req, res) => {
     try {
@@ -10,7 +10,7 @@ const deleteHandler = async (req, res) => {
     }
     catch (err) {
         console.log(err.message);
-        errorHanlder(res);
+        errorHandler(res);
     }
 }
 

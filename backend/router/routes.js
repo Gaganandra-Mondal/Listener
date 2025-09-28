@@ -9,10 +9,10 @@ import registerHandler from "../controllers/registerHanlder.js";
 import login from "../controllers/loginHandler.js";
 import logoutHanlder from "../controllers/logoutHandler.js";
 
-import userHanlder from "../controllers/userHandler.js";
-import singerHanlder from "../controllers/singerHandler.js";
+import userHandler from "../controllers/userHandler.js";
+import singerHandler from "../controllers/singerHandler.js";
 
-import singerRegisterHanlder from "../controllers/singerRegisterHandler.js";
+import singerRegisterHandler from "../controllers/singerRegisterHandler.js";
 import singerLoginHandler from "../controllers/singerLoginHandler.js";
 import singerLogoutHandler from "../controllers/singerLogoutHandler.js";
 
@@ -22,6 +22,7 @@ import dislikeHandler from "../controllers/dislikeHandler.js";
 import followHandler from "../controllers/followHandler.js";
 import unfollowHandler from "../controllers/unfollowHandler.js";
 import recomendedHandler from "../controllers/recomendedHandler.js";
+import allsingersHandler from "../controllers/allsingersHandler.js";
 
 const router = Router();
 
@@ -32,10 +33,11 @@ router.route("/register").post(registerHandler);
 router.route("/login").post(login);
 router.route("/logout").get(verifier, logoutHanlder);
 
-router.route("/users").get(verifier, userHanlder);
-router.route("/singers").get(verifier, singerHanlder);
+router.route("/users").get(verifier, userHandler);
+router.route("/singers").get(verifier, singerHandler);
+router.route("/allsingers").get(allsingersHandler);
 
-router.route("/singerRegister").post(singerRegisterHanlder);
+router.route("/singerRegister").post(singerRegisterHandler);
 router.route("/singerLogin").post(singerLoginHandler);
 router.route("/singerLogout").get(verifier, singerLogoutHandler);
 
