@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiMenuAlt2, HiX } from "react-icons/hi";
 
 const SideBarLeft = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const filters = ["deb", "shub", "gagan"];
-
+  const [singers, setSingers] = useState([]);
+  useEffect(() => {
+    async function getSingers() {
+      let response = await fetch("http://localhost:3333/allsingers");
+      let data = await response.json();
+      setSingers(data.message);
+    }
+    getSingers();
+  });
   return (
     <aside className="lg:w-64">
       {/* Mobile Toggle Button */}
@@ -46,13 +52,16 @@ const SideBarLeft = ({ theme }) => {
         </h2>
 
         <div className="flex flex-col gap-2">
-          {filters.map((item, i) => (
+          {singers?.map((singer, i) => (
             <button
               key={i}
-              className={`text-${theme.text} bg-${theme.background} px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-${theme.hoverText} hover:bg-white/10 text-left`}
+              className={`text-${theme.text} bg-${theme.background} flex flex-row gap-2 items-center justify-start px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-${theme.hoverText} hover:bg-white/10 text-left`}
               onClick={() => setIsOpen(false)}
             >
-              {item}
+              <p className="bg-red-500 text-white rounded-full w-10 text-center h-10 cir p-2">
+                {singer.name[0].toUpperCase()}
+              </p>
+              {singer.name}
             </button>
           ))}
         </div>

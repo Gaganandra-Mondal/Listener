@@ -1,37 +1,29 @@
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 const MainContent = () => {
   let theme = useOutletContext();
-  const cards = [
-    {
-      title: "Card 1",
-      desc: "Featured Artist",
-      badge: "HOT",
-      img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      title: "Card 2",
-      desc: "New Release",
-      badge: "NEW",
-      img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      title: "Card 3",
-      desc: "Popular Track",
-      badge: "TRENDING",
-      img: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80",
-    },
-  ];
+  let [songs, setSongs] = useState([]);
+  useEffect(() => {
+    async function getSongs() {
+      let response = await fetch("http://localhost:3333/");
+      let data = await response.json();
+      setSongs(data.message);
+    }
+    getSongs();
+  }, []);
 
   return (
-    <main className={`flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}>
+    <main
+      className={`flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
+    >
       {/* Hero Cards */}
       <section className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
-        {cards.map((card, i) => (
+        {songs?.map((song, i) => (
           <div
             key={i}
             className={`relative h-64 sm:h-72 rounded-xl overflow-hidden shadow-md group border border-white/5 bg-${theme.background} cursor-pointer transform transition hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl`}
             style={{
-              backgroundImage: `url(${card.img})`,
+              backgroundImage: `url(${song.img})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -41,15 +33,15 @@ const MainContent = () => {
 
             {/* Badge */}
             <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 sm:px-3 sm:py-1 rounded-full">
-              {card.badge}
+              {song.genre}
             </div>
 
             {/* Content */}
             <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-base sm:text-lg font-semibold">
-                {card.title}
+                {song.sname}
               </h3>
-              <p className="text-gray-300 text-xs sm:text-sm">{card.desc}</p>
+              <p className="text-gray-300 text-xs sm:text-sm">{song.aname}</p>
             </div>
           </div>
         ))}
