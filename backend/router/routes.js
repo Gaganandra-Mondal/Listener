@@ -1,5 +1,7 @@
 //? imports 
 import { Router } from "express";
+import express from "express";
+import { upload } from "../controllers/uploadHandler.js";
 
 import verifier from "../middlewares/verifier.js";
 
@@ -16,6 +18,8 @@ import singerRegisterHandler from "../controllers/singerRegisterHandler.js";
 import singerLoginHandler from "../controllers/singerLoginHandler.js";
 import singerLogoutHandler from "../controllers/singerLogoutHandler.js";
 
+import uploadHandler from "../controllers/uploadHandler.js";
+
 import likeHandler from "../controllers/likeHandler.js";
 import dislikeHandler from "../controllers/dislikeHandler.js";
 
@@ -29,23 +33,25 @@ const router = Router();
 //? Api routes exposed to the frontend.
 router.route("/").get(homeHandler);
 
-router.route("/register").post(registerHandler);
-router.route("/login").post(login);
+router.route("/register").post(express.json(), registerHandler);
+router.route("/login").post(express.json(), login);
 router.route("/logout").get(verifier, logoutHanlder);
 
 router.route("/users").get(verifier, userHandler);
 router.route("/singers").get(verifier, singerHandler);
 router.route("/allsingers").get(allsingersHandler);
 
-router.route("/singerRegister").post(singerRegisterHandler);
-router.route("/singerLogin").post(singerLoginHandler);
+router.route("/singerRegister").post(express.json(), singerRegisterHandler);
+router.route("/singerLogin").post(express.json(), singerLoginHandler);
 router.route("/singerLogout").get(verifier, singerLogoutHandler);
 
-router.route("/likes/:id").post(verifier, likeHandler);
-router.route("/dislikes/:id").post(verifier, dislikeHandler);
+router.route("/songsUpload").post(verifier, upload.fields([{ name: 'img', maxCount: 1 }, { name: 'url', maxCount: 1 }]),uploadHandler);
 
-router.route("/follows/:id").post(verifier, followHandler);
-router.route("/unfollows/:id").post(verifier, unfollowHandler);
+router.route("/likes/:id").post(verifier, express.json(), likeHandler);
+router.route("/dislikes/:id").post(verifier, express.json(), dislikeHandler);
+
+router.route("/follows/:id").post(verifier, express.json(), followHandler);
+router.route("/unfollows/:id").post(verifier, express.json(), unfollowHandler);
 router.route("/recomended").get(verifier, recomendedHandler);
 
 export default router;
