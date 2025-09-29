@@ -17,11 +17,11 @@ const NavBar = ({ theme, toggleTheme }) => {
 
   return (
     <nav
-      className={`bg-${theme.background} text-${theme.text} backdrop-blur-md border border-white/5 rounded-xl shadow-md px-4 py-3 md:px-6 md:py-3 flex items-center justify-between sticky top-3 z-50 mx-3 md:mx-4 mt-3`}
+      className={`bg-${theme.background}/90 text-${theme.text} backdrop-blur-md border border-white/5 rounded-xl shadow-md px-4 py-3 md:px-6 md:py-3 flex items-center justify-between sticky top-3 z-50 mx-3 md:mx-4 mt-3`}
     >
       {/* Logo */}
       <div
-        className={`flex items-center gap-2 text-${theme.text}/70 font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5`}
+        className={`flex items-center gap-2 text-${theme.text} font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5`}
       >
         <span className="text-red-600 sm:text-lg md:text-2xl">♫</span>
         <span className=" md:text-2xl sm:inline sm:text-lg">Listener</span>

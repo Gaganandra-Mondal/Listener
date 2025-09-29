@@ -17,15 +17,16 @@ const MainContent = () => {
       className={`flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
     >
       {/* Hero Cards */}
-      <section className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+      <section className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-4 xl:grid-cols-4">
         {songs?.map((song, i) => (
           <div
             key={i}
-            className={`relative h-64 sm:h-72 rounded-xl overflow-hidden shadow-md group border border-white/5 bg-${theme.background} cursor-pointer transform transition hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl`}
+            className={`relative h-30 w-full md:h-50 xl:h-65 rounded-xl overflow-hidden shadow-md group border border-white/5 bg-${theme.background} cursor-pointer transform transition hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl`}
             style={{
               backgroundImage: `url(${song.img})`,
-              backgroundSize: "cover",
+              backgroundSize: "contain",
               backgroundPosition: "center",
+              backgroundRepeat:"no-repeat"
             }}
           >
             {/* Overlay */}
