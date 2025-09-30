@@ -41,15 +41,15 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "trending",
+        path: "topTracks",
         element: <Trending />,
       },
       {
-        path: "newreleases",
+        path: "newReleases",
         element: <NewReleases />,
       },
       {
-        path: "recommendation",
+        path: "recommended",
         element: <Recommendation />,
       },
       {

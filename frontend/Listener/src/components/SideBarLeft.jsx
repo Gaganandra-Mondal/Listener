@@ -24,14 +24,14 @@ const SideBarLeft = ({ theme }) => {
         ) : (
           <HiMenuAlt2 className="text-xl" />
         )}
-        Filters
+        Artists
       </button>
 
       {/* Sidebar Content */}
       <div
         className={`bg-${theme.background} text-${
           theme.text
-        } border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
+        } rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
         ${
           isOpen ? "block absolute left-3 right-3 z-40" : "hidden"
         } lg:block lg:relative lg:left-0 lg:right-0`}
@@ -40,7 +40,7 @@ const SideBarLeft = ({ theme }) => {
         {isOpen && (
           <button
             onClick={() => setIsOpen(false)}
-            className="lg:hidden absolute top-3 right-3 text-white text-lg"
+            className={`lg:hidden absolute top-3 right-3 text-${theme.text} text-lg`}
           >
             <HiX />
           </button>

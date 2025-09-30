@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const SideBarRight = ({ theme }) => {
   const sections = ["Top Tracks", "New Releases", "Recommended"];
-  const urls = ["trending", "newreleases", "recommendation"];
+  const urls = ["/topTracks", "/newReleases", "/recommended"];
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -24,9 +24,9 @@ const SideBarRight = ({ theme }) => {
 
       {/* Sidebar Content */}
       <div
-        className={`bg-${theme.backfround} text-${
+        className={`bg-${theme.background} text-${
           theme.text
-        } border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
+        } rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
         ${
           isOpen ? "block absolute left-3 right-3 z-40" : "hidden"
         } lg:block lg:relative lg:left-0 lg:right-0`}
@@ -35,7 +35,7 @@ const SideBarRight = ({ theme }) => {
         {isOpen && (
           <button
             onClick={() => setIsOpen(false)}
-            className="lg:hidden absolute top-3 right-3 text-white text-lg"
+            className={`lg:hidden absolute top-3 right-3 text-${theme.text} text-lg`}
           >
             <HiX />
           </button>
@@ -50,7 +50,7 @@ const SideBarRight = ({ theme }) => {
             <Link
               to={urls[idx]}
               key={idx}
-              className={`bg-${theme.backfround} text-${theme.text} px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-${theme.hoverText} hover:bg-white/10 text-left`}
+              className={`bg-${theme.background} text-${theme.text} px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-${theme.hoverText} hover:bg-white/10 text-left`}
               onClick={() => setIsOpen(false)}
             >
               {item}
