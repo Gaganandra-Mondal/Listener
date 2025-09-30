@@ -12,7 +12,7 @@ let storage = multer.memoryStorage();
 export let upload = multer({ storage, limits: { fileSize: 16 * 1024 * 1024 } }); // 16mb limit
 
 const uploadHandler = async (req, res) => {
-    let imgNameSTR, audioNameSTR = "";
+    // let imgNameSTR, audioNameSTR = "";
     try {
         let { name, duration, genre } = req.body;
         let { files } = req;
