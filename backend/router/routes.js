@@ -1,9 +1,10 @@
 //? imports 
 import { Router } from "express";
 import express from "express";
-import { upload } from "../controllers/uploadHandler.js";
 
 import verifier from "../middlewares/verifier.js";
+
+// imoprts of controllers
 
 import homeHandler from "../controllers/homeHandler.js"
 
@@ -13,11 +14,13 @@ import logoutHanlder from "../controllers/logoutHandler.js";
 
 import userHandler from "../controllers/userHandler.js";
 import singerHandler from "../controllers/singerHandler.js";
+import allsingersHandler from "../controllers/allsingersHandler.js";
 
 import singerRegisterHandler from "../controllers/singerRegisterHandler.js";
 import singerLoginHandler from "../controllers/singerLoginHandler.js";
 import singerLogoutHandler from "../controllers/singerLogoutHandler.js";
 
+import { upload } from "../controllers/uploadHandler.js";
 import uploadHandler from "../controllers/uploadHandler.js";
 
 import likeHandler from "../controllers/likeHandler.js";
@@ -25,8 +28,9 @@ import dislikeHandler from "../controllers/dislikeHandler.js";
 
 import followHandler from "../controllers/followHandler.js";
 import unfollowHandler from "../controllers/unfollowHandler.js";
+import topTracksHandler from "../controllers/topTracksHandler.js";
+import newReleasesHandler from "../controllers/newReleasesHandler.js";
 import recomendedHandler from "../controllers/recomendedHandler.js";
-import allsingersHandler from "../controllers/allsingersHandler.js";
 
 const router = Router();
 
@@ -52,6 +56,8 @@ router.route("/dislikes/:id").post(verifier, express.json(), dislikeHandler);
 
 router.route("/follows/:id").post(verifier, express.json(), followHandler);
 router.route("/unfollows/:id").post(verifier, express.json(), unfollowHandler);
-router.route("/recomended").get(verifier, recomendedHandler);
+router.route("/topTracks").get(topTracksHandler);
+router.route("/newReleases").get(newReleasesHandler);
+router.route("/recomended").get(verifier,recomendedHandler);
 
 export default router;

@@ -4,6 +4,20 @@ import { HiMenuAlt2, HiX } from "react-icons/hi";
 const SideBarLeft = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [singers, setSingers] = useState([]);
+
+  // Get actual Tailwind classes based on theme
+  const getThemeClasses = () => {
+    const isDark = theme.background === "black";
+    return {
+      background: isDark ? "bg-black" : "bg-white",
+      text: isDark ? "text-gray-300" : "text-black",
+      hoverText: isDark ? "hover:text-white" : "hover:text-gray-800",
+      overlay: isDark ? "bg-black" : "bg-white"
+    };
+  };
+
+  const themeClasses = getThemeClasses();
+
   useEffect(() => {
     async function getSingers() {
       let response = await fetch("http://localhost:3333/allsingers");
@@ -11,12 +25,13 @@ const SideBarLeft = ({ theme }) => {
       setSingers(data.message);
     }
     getSingers();
-  });
+  }, []); // Added empty dependency array to prevent infinite re-renders
+
   return (
-    <aside className="lg:w-64">
+    <aside className="w-full lg:w-64 relative">
       {/* Mobile Toggle Button */}
       <button
-        className={`lg:hidden flex items-center gap-2 text-white bg-red-600 px-4 py-3 rounded-lg mb-3 w-full justify-center`}
+        className="lg:hidden flex items-center gap-2 text-white bg-red-600 px-4 py-3 rounded-lg mb-3 w-full justify-center z-40 relative"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (
@@ -24,23 +39,27 @@ const SideBarLeft = ({ theme }) => {
         ) : (
           <HiMenuAlt2 className="text-xl" />
         )}
-        Filters
+        Artists
       </button>
 
       {/* Sidebar Content */}
       <div
-        className={`bg-${theme.background} text-${
-          theme.text
-        } border border-white/5 rounded-xl shadow-md p-4 overflow-y-auto transition-all duration-300 
-        ${
-          isOpen ? "block absolute left-3 right-3 z-40" : "hidden"
-        } lg:block lg:relative lg:left-0 lg:right-0`}
+        className={`
+          ${themeClasses.background} ${themeClasses.text}
+          rounded-xl shadow-lg p-4 overflow-y-auto transition-all duration-300 
+          ${isOpen 
+            ? "fixed top-20 left-4 right-4 z-50 max-h-[80vh] overflow-y-auto" 
+            : "hidden"
+          } 
+          lg:block lg:relative lg:top-0 lg:left-0 lg:right-0 lg:z-auto lg:max-h-none
+        `}
       >
         {/* Close button for mobile */}
         {isOpen && (
           <button
             onClick={() => setIsOpen(false)}
-            className="lg:hidden absolute top-3 right-3 text-white text-lg"
+            className="lg:hidden absolute top-3 right-3 text-lg z-50"
+            style={{ color: theme.text }}
           >
             <HiX />
           </button>
@@ -55,13 +74,19 @@ const SideBarLeft = ({ theme }) => {
           {singers?.map((singer, i) => (
             <button
               key={i}
-              className={`text-${theme.text} bg-${theme.background} flex flex-row gap-2 items-center justify-start px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition hover:border-red-600 hover:text-${theme.hoverText} hover:bg-white/10 text-left`}
+              className={`
+                ${themeClasses.text} ${themeClasses.background} 
+                flex flex-row gap-2 items-center justify-start px-3 py-3 rounded-md 
+                cursor-pointer border-l-4 border-transparent transition-all duration-200 
+                hover:border-red-600 ${themeClasses.hoverText} 
+                hover:bg-gray-100 dark:hover:bg-white/10 text-left w-full
+              `}
               onClick={() => setIsOpen(false)}
             >
-              <p className="bg-red-500 text-white rounded-full w-10 text-center h-10 cir p-2">
+              <div className="bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
                 {singer.name[0].toUpperCase()}
-              </p>
-              {singer.name}
+              </div>
+              <span className="truncate">{singer.name}</span>
             </button>
           ))}
         </div>
@@ -70,7 +95,7 @@ const SideBarLeft = ({ theme }) => {
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className={`fixed inset-0 bg-${theme.background} z-30 lg:hidden`}
+          className={`fixed inset-0 ${themeClasses.background} opacity-50 z-40 lg:hidden`}
           onClick={() => setIsOpen(false)}
         />
       )}
