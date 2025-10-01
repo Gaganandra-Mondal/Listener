@@ -12,7 +12,7 @@ const SideBarLeft = ({ theme }) => {
       background: isDark ? "bg-black" : "bg-white",
       text: isDark ? "text-gray-300" : "text-black",
       hoverText: isDark ? "hover:text-white" : "hover:text-gray-800",
-      overlay: isDark ? "bg-black" : "bg-white"
+      overlay: isDark ? "bg-black" : "bg-white",
     };
   };
 
@@ -47,9 +47,10 @@ const SideBarLeft = ({ theme }) => {
         className={`
           ${themeClasses.background} ${themeClasses.text}
           rounded-xl shadow-lg p-4 overflow-y-auto transition-all duration-300 
-          ${isOpen 
-            ? "fixed top-20 left-4 right-4 z-50 max-h-[80vh] overflow-y-auto" 
-            : "hidden"
+          ${
+            isOpen
+              ? "fixed top-20 left-4 right-4 z-50 max-h-[80vh] overflow-y-auto"
+              : "hidden"
           } 
           lg:block lg:relative lg:top-0 lg:left-0 lg:right-0 lg:z-auto lg:max-h-none
         `}

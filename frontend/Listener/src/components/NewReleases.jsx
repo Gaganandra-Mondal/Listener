@@ -1,31 +1,30 @@
 import { useOutletContext } from "react-router-dom";
-import { useEffect,useState } from "react";
-
+import { useEffect, useState } from "react";
 
 const NewReleases = () => {
   let theme = useOutletContext();
 
-    let [songs,setSongs] = useState([]);
-  
-    useEffect(()=>{
-      async function getNewReleases(){
-        try{
-      const response =  await fetch("http://localhost:3333/newReleases"); 
-      if(!response.ok){
-        const data = await response.json();
-        alert(data.message);
-        return;
-      } else {
-      const data = await response.json();
-      setSongs(data.message);
+  let [songs, setSongs] = useState([]);
+
+  useEffect(() => {
+    async function getNewReleases() {
+      try {
+        const response = await fetch("http://localhost:3333/newReleases");
+        if (!response.ok) {
+          const data = await response.json();
+          alert(data.message);
+          return;
+        } else {
+          const data = await response.json();
+          setSongs(data.message);
+        }
+      } catch (err) {
+        console.log(err.message);
+        alert(err.message);
       }
-    } catch (err) {
-      console.log(err.message);
-      alert(err.message);
     }
-  }
     getNewReleases();
-    },[]);
+  }, []);
 
   return (
     <main
@@ -41,7 +40,7 @@ const NewReleases = () => {
               backgroundImage: `url(${song.img})`,
               backgroundSize: "contain",
               backgroundPosition: "center",
-              backgroundRepeat:"no-repeat"
+              backgroundRepeat: "no-repeat",
             }}
           >
             {/* Overlay */}
