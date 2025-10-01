@@ -26,7 +26,7 @@ const MainContent = () => {
               backgroundImage: `url(${song.img})`,
               backgroundSize: "contain",
               backgroundPosition: "center",
-              backgroundRepeat:"no-repeat"
+              backgroundRepeat: "no-repeat",
             }}
           >
             {/* Overlay */}
