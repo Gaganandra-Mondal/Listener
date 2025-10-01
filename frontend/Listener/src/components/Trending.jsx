@@ -8,10 +8,21 @@ const Trending = () => {
 
   useEffect(()=>{
     async function getTopTracks(){
+      try{
     const response =  await fetch("http://localhost:3333/topTracks"); 
+    if(!response.ok){
+      const data = await response.json();
+      alert(data.message);
+      return;
+    } else {
     const data = await response.json();
     setSongs(data.message);
+    }
+  } catch (err){
+    console.log(err.message);
+    alert(err.message);
   }
+}
   getTopTracks();
   },[]);
 
