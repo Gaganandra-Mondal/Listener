@@ -1,20 +1,29 @@
 import { useOutletContext } from "react-router-dom";
-import { useEffect,useState } from "react";
-
+import { useEffect, useState } from "react";
 
 const Recommendation = () => {
   let theme = useOutletContext();
 
-    let [songs,setSongs] = useState([]);
+  let [songs, setSongs] = useState([]);
 
-  useEffect(()=>{
-    async function getRecomendations(){
-    const response =  await fetch("http://localhost:3333/recomended"); 
-    const data = await response.json();
-    setSongs(data.message);
-  }
-  getRecomendations();
-  },[]);
+  useEffect(() => {
+    try {
+      async function getRecomendations() {
+        const response = await fetch("http://localhost:3333/recomended");
+        if (!response.ok) {
+          let data = await response.json();
+          alert(data.message + " Login First");
+          return;
+        }
+        const data = await response.json();
+        setSongs(data.message);
+      }
+      getRecomendations();
+    } catch (err) {
+      console.log(err.message);
+      alert(err.message);
+    }
+  }, []);
 
   return (
     <main
@@ -30,7 +39,7 @@ const Recommendation = () => {
               backgroundImage: `url(${song.img})`,
               backgroundSize: "contain",
               backgroundPosition: "center",
-              backgroundRepeat:"no-repeat"
+              backgroundRepeat: "no-repeat",
             }}
           >
             {/* Overlay */}
