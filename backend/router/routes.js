@@ -32,6 +32,8 @@ import topTracksHandler from "../controllers/topTracksHandler.js";
 import newReleasesHandler from "../controllers/newReleasesHandler.js";
 import recomendedHandler from "../controllers/recomendedHandler.js";
 
+import songsHandler from "../controllers/songHandler.js";
+
 const router = Router();
 
 //? Api routes exposed to the frontend.
@@ -49,7 +51,7 @@ router.route("/singerRegister").post(express.json(), singerRegisterHandler);
 router.route("/singerLogin").post(express.json(), singerLoginHandler);
 router.route("/singerLogout").get(verifier, singerLogoutHandler);
 
-router.route("/songsUpload").post(verifier, upload.fields([{ name: 'img', maxCount: 1 }, { name: 'url', maxCount: 1 }]),uploadHandler);
+router.route("/songsUpload").post(verifier, upload.fields([{ name: 'img', maxCount: 1 }, { name: 'url', maxCount: 1 }]), uploadHandler);
 
 router.route("/likes/:id").post(verifier, express.json(), likeHandler);
 router.route("/dislikes/:id").post(verifier, express.json(), dislikeHandler);
@@ -58,6 +60,8 @@ router.route("/follows/:id").post(verifier, express.json(), followHandler);
 router.route("/unfollows/:id").post(verifier, express.json(), unfollowHandler);
 router.route("/topTracks").get(topTracksHandler);
 router.route("/newReleases").get(newReleasesHandler);
-router.route("/recomended").get(verifier,recomendedHandler);
+router.route("/recomended").get(verifier, recomendedHandler);
+
+router.route("/songs/:sid").get(songsHandler);
 
 export default router;
