@@ -20,7 +20,7 @@ const singerLoginHandler = async (req, res) => {
         } else {
             // Set cookie
             let token = jwt.sign({ id: user.rows[0].id }, "this is the secret key for listener app", { expiresIn: '30d' });
-            res.cookie('token', token, { httpOnly: true, sameSite: 'None', maxAge: 30 * 24 * 60 * 60 * 1000 });
+            res.cookie('token', token, { maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true, secure: false, sameSite: 'None', secure: "false" });
             res.status(200).json({ message: 'Logged in Successfully' });
         }
     } catch (err) {

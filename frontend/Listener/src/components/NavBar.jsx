@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiMenu, HiX, HiSearch } from "react-icons/hi";
 import { NavLink, Link } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
@@ -9,6 +9,44 @@ const NavBar = ({ theme, toggleTheme }) => {
   const [session, setSession] = useState(false);
   const [btntheme, setbtnTheme] = useState(false);
   const [profile, setProfile] = useState("U");
+
+  useEffect(() => {
+    async function fetchSessionStatus() {
+      try {
+        let u_type = localStorage.getItem("u_type");
+        if (u_type === "user") {
+          let response = await fetch("http://localhost:3333/userProfile", {
+            method: "GET",
+            credentials: "include",
+          });
+          let data = await response.json();
+          if (response.ok) {
+            setSession(true);
+            setProfile(data.message.name[0].toUpperCase());
+          } else {
+            alert(data.message);
+          }
+        } else if (u_type === "singer") {
+          let response = await fetch("http://localhost:3333/userProfile", {
+            method: "GET",
+            credentials: "include",
+          });
+          let data = await response.json();
+          if (response.ok) {
+            setSession(true);
+            setProfile(data.message.name[0].toUpperCase());
+          } else {
+            alert(data.message);
+          }
+        }
+      } catch (err) {
+        console.log(err.message);
+        setSession(false);
+        alert(err.message);
+      }
+    }
+    fetchSessionStatus();
+  }, []);
 
   const styles = {
     link: `relative transition duration-300 group px-2 py-1`,

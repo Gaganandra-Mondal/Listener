@@ -1,79 +1,122 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const UserLogin = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   async function submitHandler(data) {
-    // console.log(data);
     try {
-      let response = await fetch("http://localhost:3333/userLogin", {
+      setLoading(true);
+      const response = await fetch("http://localhost:3333/userLogin", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        credentials: "include",
       });
+
+      const resData = await response.json();
+
       if (!response.ok) {
-        let resData = await response.json();
-        alert(resData.message);
+        alert(resData.message || "Login failed");
       } else {
-        let resData = await response.json();
-        alert(resData.message);
+        localStorage.setItem("u_type", "user");
+        alert(resData.message || "Login successful");
+        reset();
+        setTimeout(() => navigate("/"), 300);
       }
     } catch (err) {
-      console.log(err.message);
-      alert(err.message);
+      console.error(err);
+      alert("Something went wrong: " + err.message);
+    } finally {
+      setLoading(false);
     }
   }
+
   return (
-    <div className="flex flex-col justify-center items-center w-screen h-screen bg-black">
+    <div className="flex flex-col justify-center items-center min-h-screen w-screen bg-gradient-to-b from-black via-[#0f0f10] to-black p-4">
       {/* Logo */}
-      <Link to="/">
-        <div
-          className={`flex items-center gap-4 m-4 text-white font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5`}
-        >
-          <span className="text-red-600 sm:text-lg md:text-3xl">♫</span>
-          <span className=" md:text-3xl sm:inline sm:text-lg">Listener</span>
-        </div>
+      <Link to="/" className="group flex items-center gap-3 mb-6">
+        <span className="text-red-600 text-3xl transition-transform group-hover:-translate-y-1">
+          ♫
+        </span>
+        <span className="text-white font-bold text-2xl tracking-wide group-hover:text-red-400 transition-colors">
+          Listener
+        </span>
       </Link>
+
+      {/* Login Card */}
       <form
         onSubmit={handleSubmit(submitHandler)}
-        className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl"
+        className="bg-[#18181b]/90 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-2xl w-full max-w-md space-y-6"
       >
-        <div className="flex flex-col gap-2 w-72">
-          <label className="text-gray-200 font-semibold">Email</label>
+        <h1 className="text-3xl font-bold text-white text-center">
+          User Login
+        </h1>
+
+        {/* Email */}
+        <div className="flex flex-col">
+          <label htmlFor="email" className="text-gray-300 font-medium mb-1">
+            Email
+          </label>
           <input
+            id="email"
             type="email"
-            placeholder="Email"
-            {...register("email")}
+            placeholder="Enter your email"
+            {...register("email", { required: true })}
+            className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
             required
-            className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
         </div>
 
-        <div className="flex flex-col gap-2 w-72">
-          <label className="text-gray-200 font-semibold">Password</label>
+        {/* Password */}
+        <div className="flex flex-col relative">
+          <label htmlFor="password" className="text-gray-300 font-medium mb-1">
+            Password
+          </label>
           <input
-            type="password"
-            placeholder="Password"
-            {...register("password")}
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            {...register("password", { required: true })}
+            className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-lg px-4 py-2.5 pr-12 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
             required
-            className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
+          {/* Toggle Visibility */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-9 text-gray-400 hover:text-gray-200 text-sm"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
 
+        {/* Login Button */}
         <button
           type="submit"
-          className="w-72 mt-2 bg-gradient-to-r from-red-700 to-red-500 text-white font-bold py-2 rounded-lg shadow-lg hover:from-red-800 hover:to-red-600 transition"
+          disabled={loading}
+          className={`w-full bg-gradient-to-r from-red-700 to-red-500 text-white font-semibold text-lg py-3 rounded-xl shadow-lg transition-all hover:from-red-800 hover:to-red-600 hover:shadow-red-800/50 ${
+            loading ? "opacity-70 cursor-not-allowed" : ""
+          }`}
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
-        <h2 className="text-white">
-          Don't have Account?{" "}
-          <Link to="/userregister" className="text-red-500">
+
+        {/* Register Link */}
+        <p className="text-center text-gray-300">
+          Don’t have an account?{" "}
+          <Link
+            to="/userregister"
+            className="text-red-400 hover:text-red-300 hover:underline transition-colors"
+          >
             Register
           </Link>
-        </h2>
+        </p>
       </form>
     </div>
   );
