@@ -7,6 +7,8 @@ import verifier from "../middlewares/verifier.js";
 // imoprts of controllers
 
 import homeHandler from "../controllers/homeHandler.js"
+import discoverHandler from "../controllers/discoverHandler.js";
+import albumHandler from "../controllers/albumHandler.js";
 
 import registerHandler from "../controllers/registerHanlder.js";
 import login from "../controllers/loginHandler.js";
@@ -38,6 +40,8 @@ const router = Router();
 
 //? Api routes exposed to the frontend.
 router.route("/").get(homeHandler);
+router.route("/discover").get(discoverHandler);
+router.route("/album").get(albumHandler);
 
 router.route("/register").post(express.json(), registerHandler);
 router.route("/login").post(express.json(), login);
