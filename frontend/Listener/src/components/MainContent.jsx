@@ -36,6 +36,7 @@ const MainContent = () => {
             <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 sm:px-3 sm:py-1 rounded-full">
               {song.genre}
             </div>
+            
 
             {/* Content */}
             <div className="absolute bottom-4 left-4 text-white">

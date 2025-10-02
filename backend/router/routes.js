@@ -40,7 +40,7 @@ const router = Router();
 
 //? Api routes exposed to the frontend.
 router.route("/").get(homeHandler);
-router.route("/discover").get(discoverHandler);
+router.route("/discover").get(verifier,discoverHandler);
 router.route("/album").get(albumHandler);
 
 router.route("/register").post(express.json(), registerHandler);
