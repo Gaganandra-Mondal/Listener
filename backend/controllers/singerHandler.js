@@ -1,18 +1,20 @@
-import errorHanlder from "../error.js";
-import pool from "../db.js";
-
-const singerHandler = async (req, res) => {
+import jwt from "jsonwebtoken";
+let secret = "this is the secret key for listener app";
+const sessionCheckSinger = async (req, res, next) => {
+    // console.log("This is the verifier middleware");
     try {
-        const id = req.userID;
-        const response = await pool.query('select id,email,name,gender,manager_email,manager_name from artists where id = $1;', [id]);
-        if (response.rows.length === 0) {
-            return res.status(401).json({ message: "artist not found" });
+        let token = req.cookies.token;
+        if (!token) {
+            // console.log("no token");
+            return res.status(401).json({ message: "Unauthorized" });
         } else {
-            res.status(200).json({ message: response.rows });
+            // console.log(token);
+            token = jwt.verify(token, secret);
+            req.userID = token.id;
+            next();
         }
     } catch (err) {
-        console.log(err.message);
-        errorHanlder(res);
+        return res.status(401).json({ message: "Unauthorized" });
     }
 }
-export default singerHandler;
+export default sessionCheckSinger;

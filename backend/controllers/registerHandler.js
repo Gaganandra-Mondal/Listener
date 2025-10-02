@@ -19,7 +19,7 @@ const registerHandler = async (req, res) => {
         const token = jwt.sign({ id: newUser.rows[0].id }, "this is the secret key for listener app", { expiresIn: '7d' });
 
         // Set cookie
-        res.cookie('token', token, { httpOnly: true, sameSite: 'None', maxAge: 7 * 24 * 60 * 60 * 1000 });
+        res.cookie('token', token, { maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true, secure: false, sameSite: 'None', secure: "false" });
         res.status(201).json({ message: 'Registered Successfully' });
 
     } catch (err) {
