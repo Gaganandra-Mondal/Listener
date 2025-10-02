@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { HiMenuAlt2, HiX } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const SideBarLeft = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +74,7 @@ const SideBarLeft = ({ theme }) => {
 
         <div className="flex flex-col gap-2">
           {singers?.map((singer, i) => (
-            <button
+            <Link to={`/singerProfile/`} ><button
               key={i}
               className={`
                 ${themeClasses.text} ${themeClasses.background} 
@@ -82,13 +83,15 @@ const SideBarLeft = ({ theme }) => {
                 hover:border-red-600 ${themeClasses.hoverText} 
                 hover:bg-gray-100 dark:hover:bg-white/10 text-left w-full
               `}
-              onClick={() => setIsOpen(false)}
+              onClick={() => { 
+                setIsOpen(false);
+              }}
             >
               <div className="bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
                 {singer.name[0].toUpperCase()}
               </div>
               <span className="truncate">{singer.name}</span>
-            </button>
+            </button></Link>
           ))}
         </div>
       </div>
