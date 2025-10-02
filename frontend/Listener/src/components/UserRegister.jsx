@@ -69,7 +69,7 @@ const UserRegister = () => {
         </button>
         <h2 className="text-white">
           Already have an Account?{" "}
-          <Link to="/userlogin" className="text-red-400">
+          <Link to="/userlogin" className="text-red-500">
             Login
           </Link>
         </h2>

@@ -8,6 +8,7 @@ const NavBar = ({ theme, toggleTheme }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [session, setSession] = useState(false);
   const [btntheme, setbtnTheme] = useState(false);
+  const [profile, setProfile] = useState("U");
 
   const styles = {
     link: `relative transition duration-300 group px-2 py-1`,
@@ -100,7 +101,7 @@ const NavBar = ({ theme, toggleTheme }) => {
             <div
               className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition`}
             >
-              U
+              {profile}
             </div>
           </Link>
         ) : (
@@ -181,7 +182,7 @@ const NavBar = ({ theme, toggleTheme }) => {
           <div
             className={`w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer`}
           >
-            U
+            {profile}
           </div>
         </div>
       )}
