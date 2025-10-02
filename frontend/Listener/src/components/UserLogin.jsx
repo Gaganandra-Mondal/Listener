@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const UserLogin = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -90,9 +91,13 @@ const UserLogin = () => {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-9 text-gray-400 hover:text-gray-200 text-sm"
+            className="absolute right-3 top-10.5 text-gray-400 hover:text-gray-200 text-sm"
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? (
+              <AiFillEyeInvisible size={20} />
+            ) : (
+              <AiFillEye size={20} />
+            )}
           </button>
         </div>
 

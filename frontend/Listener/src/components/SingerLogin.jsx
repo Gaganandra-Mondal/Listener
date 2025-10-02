@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 const SingerLogin = () => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="flex flex-col justify-center items-center w-screen h-screen bg-black">
       <div className="flex items-center gap-4 m-4 text-white font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5">
@@ -19,14 +22,27 @@ const SingerLogin = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-2 w-72">
-          <label className="text-gray-200 font-semibold">Password</label>
+        <div className="flex flex-col gap-2 w-72 relative">
+          <label htmlFor="password" className="text-gray-300 font-medium mb-1">
+            Password
+          </label>
           <input
-            type="password"
-            placeholder="Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Your Password"
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
             required
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-11.5 text-gray-400 hover:text-gray-200 text-sm"
+          >
+            {showPassword ? (
+              <AiFillEyeInvisible size={20} />
+            ) : (
+              <AiFillEye size={20} />
+            )}
+          </button>
         </div>
 
         <button
