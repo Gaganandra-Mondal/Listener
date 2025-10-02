@@ -39,7 +39,7 @@ const UserLogin = () => {
         </button>
         <h2 className="text-white">
           Don't have Account?{" "}
-          <Link to="/userregister" className="text-red-400">
+          <Link to="/userregister" className="text-red-500">
             Register
           </Link>
         </h2>

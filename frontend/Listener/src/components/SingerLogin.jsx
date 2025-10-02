@@ -4,7 +4,9 @@ const SingerLogin = () => {
     <div className="flex flex-col justify-center items-center w-screen h-screen bg-black">
       <div className="flex items-center gap-4 m-4 text-white font-bold text-lg md:text-xl cursor-pointer transition-transform duration-300 hover:-translate-y-0.5">
         <span className="text-red-600 sm:text-lg md:text-3xl">♫</span>
-        <span className=" md:text-3xl sm:inline sm:text-lg"><Link to="/">Listener</Link></span>
+        <span className=" md:text-3xl sm:inline sm:text-lg">
+          <Link to="/">Listener</Link>
+        </span>
       </div>
       <form className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl">
         <div className="flex flex-col gap-2 w-72">
@@ -34,7 +36,7 @@ const SingerLogin = () => {
           Login
         </button>
         <p className="text-white">
-          Don't have account?
+          Don't have account?{" "}
           <Link to="/singerregister" className="text-red-500">
             Register
           </Link>
