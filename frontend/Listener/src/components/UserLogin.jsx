@@ -1,6 +1,30 @@
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const UserLogin = () => {
+  const { register, handleSubmit } = useForm();
+  async function submitHandler(data) {
+    // console.log(data);
+    try {
+      let response = await fetch("http://localhost:3333/userLogin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        let resData = await response.json();
+        alert(resData.message);
+      } else {
+        let resData = await response.json();
+        alert(resData.message);
+      }
+    } catch (err) {
+      console.log(err.message);
+      alert(err.message);
+    }
+  }
   return (
     <div className="flex flex-col justify-center items-center w-screen h-screen bg-black">
       {/* Logo */}
@@ -12,12 +36,17 @@ const UserLogin = () => {
           <span className=" md:text-3xl sm:inline sm:text-lg">Listener</span>
         </div>
       </Link>
-      <form className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl">
+      <form
+        onSubmit={handleSubmit(submitHandler)}
+        className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl"
+      >
         <div className="flex flex-col gap-2 w-72">
           <label className="text-gray-200 font-semibold">Email</label>
           <input
             type="email"
             placeholder="Email"
+            {...register("email")}
+            required
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
         </div>
@@ -27,6 +56,8 @@ const UserLogin = () => {
           <input
             type="password"
             placeholder="Password"
+            {...register("password")}
+            required
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
         </div>

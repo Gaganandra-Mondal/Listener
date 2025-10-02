@@ -43,9 +43,9 @@ router.route("/").get(homeHandler);
 router.route("/discover").get(verifier,discoverHandler);
 router.route("/album").get(albumHandler);
 
-router.route("/register").post(express.json(), registerHandler);
-router.route("/login").post(express.json(), login);
-router.route("/logout").get(verifier, logoutHanlder);
+router.route("/userRegister").post(express.json(), registerHandler);
+router.route("/userLogin").post(express.json(), login);
+router.route("/userLogout").get(verifier, logoutHanlder);
 
 router.route("/users").get(verifier, userHandler);
 router.route("/singers").get(verifier, singerHandler);
