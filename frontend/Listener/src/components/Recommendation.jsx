@@ -9,10 +9,13 @@ const Recommendation = () => {
   useEffect(() => {
     try {
       async function getRecomendations() {
-        const response = await fetch("http://localhost:3333/recomended");
+        const response = await fetch("http://localhost:3333/recommended", {
+          method: "GET",
+          credentials: "include",
+        });
         if (!response.ok) {
           let data = await response.json();
-          alert(data.message + " Login First");
+          alert(data.message);
           return;
         }
         const data = await response.json();

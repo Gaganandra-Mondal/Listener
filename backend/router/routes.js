@@ -38,7 +38,7 @@ router.get("/newReleases", newReleasesHandler);
 router.get("/userProfile", verifier, userHandler);
 router.get("/singerProfile", verifier, singerHandler);
 router.get("/discover", verifier, discoverHandler);
-router.get("/recomended", verifier, recomendedHandler);
+router.get("/recommended", verifier, recomendedHandler);
 router.get("/songs/:sid", songsHandler);
 
 // Auth routes

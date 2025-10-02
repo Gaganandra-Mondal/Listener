@@ -7,7 +7,10 @@ const Discover = () => {
   useEffect(() => {
     try {
       async function getRecomendations() {
-        const response = await fetch("http://localhost:3333/discover");
+        const response = await fetch("http://localhost:3333/discover", {
+          method: "GET",
+          credentials: "include",
+        });
         if (!response.ok) {
           let data = await response.json();
           alert(data.message + " Login First");
