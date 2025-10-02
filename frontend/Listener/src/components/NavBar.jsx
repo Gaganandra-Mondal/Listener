@@ -54,7 +54,7 @@ const NavBar = ({ theme, toggleTheme }) => {
             `${styles.link} ${isActive ? `text-red-700` : `text-${theme.text}`}`
           }
         >
-          Library
+          Albums
           <span className={styles.underline}></span>
         </NavLink>
         <NavLink

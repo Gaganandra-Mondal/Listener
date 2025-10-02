@@ -47,6 +47,10 @@ const Trending = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
 
             {/* Badge */}
+            <div className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2 py-1 sm:px-3 sm:py-1 rounded-full">
+              {"#"+ ++i}
+            </div>
+            {/* Badge */}
             <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 sm:px-3 sm:py-1 rounded-full">
               {song.genre}
             </div>
@@ -54,9 +58,9 @@ const Trending = () => {
             {/* Content */}
             <div className="absolute bottom-4 left-4 text-white">
               <h3 className="text-base sm:text-lg font-semibold">
-                {song.sname}
+                {song.name}
               </h3>
-              <p className="text-gray-300 text-xs sm:text-sm">{song.aname}</p>
+              <p className="text-gray-300 text-xs sm:text-sm">{song.name}</p>
             </div>
           </div>
         ))}
