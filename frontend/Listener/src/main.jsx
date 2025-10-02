@@ -14,6 +14,7 @@ import UserLogin from "./components/UserLogin.jsx";
 import UserRegister from "./components/UserRegister.jsx";
 import SingerLogin from "./components/SingerLogin.jsx";
 import SingerRegister from "./components/SingerRegister.jsx";
+import UserViewSingerProfile from "./components/userViewSingerProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,10 @@ const router = createBrowserRouter([
         path: "auth",
         element: <Auth />,
       },
-      {},
+      {
+        path: "singerProfile",
+        element: <UserViewSingerProfile />
+      },
       {},
     ],
   },
