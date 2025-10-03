@@ -3,7 +3,7 @@ import pool from "../db.js";
 
 const allsingersHandler = async (req, res) => {
     try {
-        const response = await pool.query("select id,email,name,gender,manager_email,manager_name from artists limit 10;");
+        const response = await pool.query("select id,email,name,gender,manager_email,manager_name,img from artists limit 10;");
         if (response.rows.length === 0) {
             return res.status(401).json({ message: "Artists are not found" });
         } else {
