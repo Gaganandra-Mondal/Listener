@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaPlay, FaUserPlus, FaUserMinus, FaMusic } from 'react-icons/fa';
+import { useOutletContext } from "react-router-dom";
 
 const mockArtist = {
     name: 'Arijit Singh',
@@ -13,6 +14,7 @@ const mockArtist = {
 };
 
 const UserViewSingerProfile = () => {
+    let theme = useOutletContext();
     const [isFollowing, setIsFollowing] = useState(false);
     const [playingSongId, setPlayingSongId] = useState(null);
 
@@ -29,7 +31,7 @@ const UserViewSingerProfile = () => {
     };
 
     return (
-        <div className="min-h-screen w-full bg-black text-gray-100 font-sans px-6 py-10 overflow-x-hidden">
+        <div className={`min-h-screen w-full bg-${theme.background} text-${theme.text} font-sans px-6 py-10 overflow-x-hidden`}>
             <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
                 <div className="relative flex-shrink-0">
                     <img
@@ -45,7 +47,7 @@ const UserViewSingerProfile = () => {
                     </div>
                 </div>
                 <div className="flex-1 text-center md:text-left">
-                    <h1 className="text-4xl font-extrabold mb-2 text-white drop-shadow-lg">{mockArtist.name}</h1>
+                    <h1 className={`text-4xl font-extrabold mb-2 text-${theme.text} drop-shadow-lg`}>{mockArtist.name}</h1>
                     <span className="text-red-400 font-semibold">
                         {mockArtist.followers.toLocaleString()} followers
                     </span>
@@ -77,8 +79,8 @@ const UserViewSingerProfile = () => {
                             className="flex flex-row gap-2 items-center justify-between px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition-all duration-200 hover:border-red-600 hover:bg-gray-100 dark:hover:bg-white/10 text-left w-full"
                         >
                             <div>
-                                <span className="text-lg font-medium text-white">{song.title}</span>
-                                <span className="ml-4 text-gray-400">{song.duration}</span>
+                                <span className={`text-lg font-medium text-${theme.text}`}>{song.title}</span>
+                                <span className={`ml-4 text-${theme.hoverText} `}>{song.duration}</span>
                             </div>
                             <button
                                 className={`px-4 py-1 rounded-md font-medium bg-red-600 hover:bg-red-600/50 cursor-pointer text-white transition-colors duration-200 flex items-center gap-1 ${playingSongId === song.id ? ' cursor-not-allowed' : ''
