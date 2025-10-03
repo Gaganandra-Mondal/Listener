@@ -1,7 +1,12 @@
 import { useOutletContext } from "react-router-dom";
+import { useState } from "react";
 
 const Profile = () => {
   let theme = useOutletContext();
+  let [userData, setUserData] = useState({
+    name: "Listener",
+    email: "listener@gmailc.com",
+  });
   async function logoutHandler() {
     let sure = window.confirm("Are you sure?");
     if (sure) {
@@ -40,7 +45,14 @@ const Profile = () => {
           }
         />
       </h2>
-      <button className="bg-red-500 p-2 rounded-lg" onClick={logoutHandler}>
+      <div className="flex flex-col gap-2">
+        <h2>Name: {userData.name}</h2>
+        <h2>Email: {userData.email}</h2>
+      </div>
+      <button
+        className="mt-2 bg-red-500 p-2 rounded-lg"
+        onClick={logoutHandler}
+      >
         LogOut
       </button>
     </main>
