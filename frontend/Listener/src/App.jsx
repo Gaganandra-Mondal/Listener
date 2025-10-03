@@ -3,9 +3,10 @@ import SideBarLeft from "./components/SideBarLeft";
 import SideBarRight from "./components/SideBarRight";
 import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const App = () => {
+  const audioRef = useRef(new Audio());
   let [theme, setTheme] = useState({
     background: "black",
     text: "gray-300",
@@ -30,13 +31,13 @@ const App = () => {
     <div
       className={`min-h-screen bg-${theme.background} text-${theme.text} flex flex-col`}
     >
-      <NavBar theme={theme} toggleTheme={toggleTheme} />
+      <NavBar theme={theme} toggleTheme={toggleTheme} audioRef={audioRef} />
       <div className="flex-1 flex flex-col lg:flex-row gap-4 p-3 md:p-4">
         <SideBarLeft theme={theme} />
-        <Outlet context={theme} />
-        <SideBarRight theme={theme} />
+        <Outlet context={{ theme, audioRef }} />
+        <SideBarRight theme={theme} audioRef={audioRef} />
       </div>
-      <Footer theme={theme} />
+      <Footer theme={theme} audioRef={audioRef} />
     </div>
   );
 };
