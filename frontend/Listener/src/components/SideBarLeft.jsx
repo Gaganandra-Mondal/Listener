@@ -74,24 +74,27 @@ const SideBarLeft = ({ theme }) => {
 
         <div className="flex flex-col gap-2">
           {singers?.map((singer, i) => (
-            <Link to={`/singerProfile/`} ><button
-              key={i}
-              className={`
+            <Link to={`/singer/${singer.id}`}>
+              <button
+                key={i}
+                className={`
                 ${themeClasses.text} ${themeClasses.background} 
                 flex flex-row gap-2 items-center justify-start px-3 py-3 rounded-md 
                 cursor-pointer border-l-4 border-transparent transition-all duration-200 
                 hover:border-red-600 ${themeClasses.hoverText} 
                 hover:bg-gray-100 dark:hover:bg-white/10 text-left w-full
               `}
-              onClick={() => { 
-                setIsOpen(false);
-              }}
-            >
-              <img className="text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 object-cover" src={singer.img} >
-                
-              </img>
-              <span className="truncate">{singer.name}</span>
-            </button></Link>
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              >
+                <img
+                  className="text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 object-cover"
+                  src={singer.img}
+                ></img>
+                <span className="truncate">{singer.name}</span>
+              </button>
+            </Link>
           ))}
         </div>
       </div>

@@ -36,6 +36,7 @@ const App = () => {
         <Outlet context={theme} />
         <SideBarRight theme={theme} />
       </div>
+      <Footer theme={theme} />
     </div>
   );
 };
