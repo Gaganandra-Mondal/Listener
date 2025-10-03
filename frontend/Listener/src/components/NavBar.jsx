@@ -23,9 +23,9 @@ const NavBar = ({ theme, toggleTheme }) => {
           if (response.ok) {
             setSession(true);
             setProfile(data.message.name[0].toUpperCase());
-          } else {
-            alert(data.message);
-          }
+          } //  else {
+          //   alert(data.message);
+          // }
         } else if (u_type === "singer") {
           let response = await fetch("http://localhost:3333/userProfile", {
             method: "GET",
@@ -35,9 +35,9 @@ const NavBar = ({ theme, toggleTheme }) => {
           if (response.ok) {
             setSession(true);
             setProfile(data.message.name[0].toUpperCase());
-          } else {
-            alert(data.message);
-          }
+          } // else {
+          //   alert(data.message);
+          // }
         }
       } catch (err) {
         console.log(err.message);

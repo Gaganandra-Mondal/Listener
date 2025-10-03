@@ -1,6 +1,33 @@
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm();
+  async function submitHandler(data) {
+    console.log(data);
+    try {
+      let response = await fetch("http://localhost:3333/userRegister", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+      if (response.ok) {
+        let data = await response.json();
+        localStorage.setItem("u_type", "user");
+        alert(data.message);
+        reset();
+        setTimeout(() => navigate("/"), 300);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert("Registration failed. Please try again.");
+    }
+  }
   return (
     <div className="flex flex-col justify-center items-center w-screen h-screen bg-black">
       {/* Logo */}
@@ -12,12 +39,17 @@ const UserRegister = () => {
           <span className=" md:text-3xl sm:inline sm:text-lg">Listener</span>
         </div>
       </Link>
-      <form className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl">
+      <form
+        onSubmit={handleSubmit(submitHandler)}
+        className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl"
+      >
         <div className="flex flex-col gap-2 w-72">
           <label className="text-gray-200 font-semibold">Name</label>
           <input
             type="text"
             placeholder="Name"
+            {...register("name")}
+            required
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
         </div>
@@ -26,6 +58,8 @@ const UserRegister = () => {
           <input
             type="email"
             placeholder="Email"
+            {...register("email")}
+            required
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
         </div>
@@ -34,6 +68,8 @@ const UserRegister = () => {
           <input
             type="password"
             placeholder="Password"
+            {...register("password")}
+            required
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
         </div>
@@ -44,6 +80,8 @@ const UserRegister = () => {
             type="number"
             placeholder="Age"
             min="0"
+            {...register("age")}
+            required
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition w-24"
           />
 
@@ -52,7 +90,8 @@ const UserRegister = () => {
             Gender
           </label>
           <select
-            name="gender"
+            {...register("gender")}
+            required
             id="gender"
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition w-28"
           >

@@ -19,7 +19,6 @@ const UserLogin = () => {
         body: JSON.stringify(data),
         credentials: "include",
       });
-
       const resData = await response.json();
 
       if (!response.ok) {
