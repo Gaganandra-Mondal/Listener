@@ -11,7 +11,7 @@ const Profile = () => {
     let sure = window.confirm("Are you sure?");
     if (sure) {
       try {
-        let response = await fetch("http://localhost:3333/userLogout", {
+        let response = await fetch("http://localhost:3333/logout", {
           method: "GET",
           credentials: "include",
         });
