@@ -27,7 +27,7 @@ const NavBar = ({ theme, toggleTheme }) => {
           //   alert(data.message);
           // }
         } else if (u_type === "singer") {
-          let response = await fetch("http://localhost:3333/userProfile", {
+          let response = await fetch("http://localhost:3333/singerProfile", {
             method: "GET",
             credentials: "include",
           });
@@ -217,11 +217,17 @@ const NavBar = ({ theme, toggleTheme }) => {
                 : link.slice(1).charAt(0).toUpperCase() + link.slice(2)}
             </Link>
           ))}
-          <div
-            className={`w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer`}
-          >
-            {profile}
-          </div>
+          {session ? (
+            <Link to="/profile">
+              <div
+                className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition`}
+              >
+                {profile}
+              </div>
+            </Link>
+          ) : (
+            <Link to="/auth">Login</Link>
+          )}
         </div>
       )}
     </nav>

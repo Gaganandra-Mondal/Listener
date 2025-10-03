@@ -44,11 +44,11 @@ router.get("/songs/:sid", songsHandler);
 // Auth routes
 router.post("/userRegister", registerHandler);
 router.post("/userLogin", login);
-router.get("/userLogout", verifier, logoutHandler);
 
 router.post("/singerRegister", singerRegisterHandler);
 router.post("/singerLogin", singerLoginHandler);
-router.get("/singerLogout", verifier, singerLogoutHandler);
+
+router.get("/logout", verifier, logoutHandler);
 
 // Actions
 router.post("/songsUpload",

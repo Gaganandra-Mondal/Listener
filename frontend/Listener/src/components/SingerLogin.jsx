@@ -1,4 +1,4 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -10,6 +10,7 @@ const SingerLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   async function submitHandler(data) {
+    console.log(data);
     try {
       setLoading(true);
       const response = await fetch("http://localhost:3333/singerLogin", {
@@ -23,7 +24,7 @@ const SingerLogin = () => {
       if (!response.ok) {
         alert(resData.message || "Login failed");
       } else {
-        localStorage.setItem("u_type", "user");
+        localStorage.setItem("u_type", "singer");
         alert(resData.message || "Login successful");
         reset();
         setTimeout(() => navigate("/"), 300);
@@ -43,17 +44,18 @@ const SingerLogin = () => {
           <Link to="/">Listener</Link>
         </span>
       </div>
-      <form 
-      onSubmit={handleSubmit(submitHandler)}
-      className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl">
+      <form
+        onSubmit={handleSubmit(submitHandler)}
+        className="flex flex-col justify-center items-center p-8 gap-6 bg-[#18181b] rounded-xl shadow-2xl"
+      >
         <div className="flex flex-col gap-2 w-72">
           <label className="text-gray-200 font-semibold">Email</label>
           <input
             type="email"
             placeholder="Email"
-            {...register("email", { required: true })}
-            className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+            {...register("email")}
             required
+            className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           />
         </div>
 
@@ -64,6 +66,7 @@ const SingerLogin = () => {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Enter Your Password"
+            {...register("password")}
             className="bg-[#23232a] text-gray-100 border border-gray-700 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600 transition"
             required
           />
