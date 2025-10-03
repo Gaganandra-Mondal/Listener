@@ -81,7 +81,7 @@ const Discover = () => {
         `}
               style={{
                 backgroundImage: `url(${song.img})`,
-                backgroundSize: "contain",
+                backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               }}
