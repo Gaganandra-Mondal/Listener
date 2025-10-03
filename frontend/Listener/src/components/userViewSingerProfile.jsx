@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaPlay, FaUserPlus, FaUserMinus, FaMusic } from 'react-icons/fa';
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 
 const mockArtist = {
     name: 'Arijit Singh',
@@ -14,9 +14,11 @@ const mockArtist = {
 };
 
 const UserViewSingerProfile = () => {
+
     let theme = useOutletContext();
     const [isFollowing, setIsFollowing] = useState(false);
     const [playingSongId, setPlayingSongId] = useState(null);
+    const [ArtistDetails, setArtistDetails] = useState([]);
 
     const handleFollow = () => setIsFollowing((prev) => !prev);
 
@@ -30,12 +32,35 @@ const UserViewSingerProfile = () => {
         setTimeout(() => setPlayingSongId(null), 1200);
     };
 
+    useEffect(() => {
+        try {
+            async function getArtistDetails() {
+                const { sid } = useParams();
+                const response = await fetch(`http://localhost:3333/singer/${sid}`, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+                if (!response.ok) {
+                    let data = await response.json();
+                    alert(data.message);
+                    return;
+                }
+                const data = await response.json();
+                // console.log(data.message);
+                setArtistDetails(data.message);
+            }
+            getArtistDetails();
+        } catch (err) {
+            console.log(err.message);
+        }
+    }, []);
+
     return (
         <div className={`min-h-screen w-full bg-${theme.background} text-${theme.text} font-sans px-6 py-10 overflow-x-hidden`}>
             <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
                 <div className="relative flex-shrink-0">
                     <img
-                        src={mockArtist.avatar}
+                        src={ArtistDetails.img}
                         alt="Artist Avatar"
                         className="w-40 h-40 rounded-full object-cover shadow-2xl border-8 border-black"
                         style={{
@@ -47,15 +72,15 @@ const UserViewSingerProfile = () => {
                     </div>
                 </div>
                 <div className="flex-1 text-center md:text-left">
-                    <h1 className={`text-4xl font-extrabold mb-2 text-${theme.text} drop-shadow-lg`}>{mockArtist.name}</h1>
+                    <h1 className={`text-4xl font-extrabold mb-2 text-${theme.text} drop-shadow-lg`}>{ArtistDetails.name}</h1>
                     <span className="text-red-400 font-semibold">
-                        {mockArtist.followers.toLocaleString()} followers
+                        {ArtistDetails.followers} followers
                     </span>
                 </div>
                 <div className="flex gap-4 mt-6 md:mt-0">
                     <button
                         onClick={handleFollow}
-                        className={`px-5 py-2 rounded-lg font-semibold transition-colors duration-200 shadow flex items-center gap-2 ${isFollowing ? 'bg-red-600/50 hover:bg-red-600/90 text-white': 'bg-white hover:bg-red-600 text-black'} cursor-pointer`}
+                        className={`px-5 py-2 rounded-lg font-semibold transition-colors duration-200 shadow flex items-center gap-2 ${isFollowing ? 'bg-red-600/50 hover:bg-red-600/90 text-white' : 'bg-white hover:bg-red-600 text-black'} cursor-pointer`}
                     >
                         {isFollowing ? <FaUserMinus /> : <FaUserPlus />}
                         {isFollowing ? 'Unfollow' : 'Follow'}

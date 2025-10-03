@@ -24,6 +24,7 @@ import topTracksHandler from "../controllers/topTracksHandler.js";
 import newReleasesHandler from "../controllers/newReleasesHandler.js";
 import recomendedHandler from "../controllers/recomendedHandler.js";
 import songsHandler from "../controllers/songHandler.js";
+import userViewSingerHandler from "../controllers/userViewSingerHandler.js";
 
 const router = Router();
 
@@ -33,6 +34,7 @@ router.get("/allsingers", allsingersHandler);
 router.get("/album", albumHandler);
 router.get("/topTracks", topTracksHandler);
 router.get("/newReleases", newReleasesHandler);
+router.get("/singer/:sid", userViewSingerHandler);
 
 // Protected routes
 router.get("/userProfile", verifier, userHandler);
