@@ -27,27 +27,16 @@ const App = () => {
     }
   }
   return (
-    <div className={`min-h-screen bg-${theme.background} text-${theme.text} flex flex-col`}>
-  <NavBar theme={theme} toggleTheme={toggleTheme} />
-  <div className="flex-1 flex flex-col lg:flex-row gap-4 p-3 md:p-4">
-    {/* Mobile: Sidebars in a row, Desktop: Normal layout */}
-    <div className="flex flex-col sm:flex-row lg:flex-col gap-4">
-    
-      <div className="w-full sm:w-1/2 lg:w-64">
+    <div
+      className={`min-h-screen bg-${theme.background} text-${theme.text} flex flex-col`}
+    >
+      <NavBar theme={theme} toggleTheme={toggleTheme} />
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-3 md:p-4">
+        <SideBarLeft theme={theme} />
+        <Outlet context={theme} />
         <SideBarRight theme={theme} />
       </div>
-      <div className="w-full sm:w-1/2 lg:w-64">
-        <SideBarLeft theme={theme} />
-      </div>
     </div>
-    
-    {/* Main Content */}
-    <div className="flex-1">
-      <Outlet context={theme} />
-    </div>
-  </div>
-  <Footer theme={theme} />
-</div>
   );
 };
 
