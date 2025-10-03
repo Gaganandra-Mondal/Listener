@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         element: <Auth />,
       },
       {
-        path: "singer/:id",
+        path: "singer/:sid",
         element: <UserViewSingerProfile />,
       },
     ],
