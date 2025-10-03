@@ -87,9 +87,9 @@ const SideBarLeft = ({ theme }) => {
                 setIsOpen(false);
               }}
             >
-              <div className="bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0">
-                {singer.name[0].toUpperCase()}
-              </div>
+              <img className="text-white rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 object-cover" src={singer.img} >
+                
+              </img>
               <span className="truncate">{singer.name}</span>
             </button></Link>
           ))}
