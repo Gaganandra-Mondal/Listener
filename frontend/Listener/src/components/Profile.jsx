@@ -1,6 +1,29 @@
 import { useOutletContext } from "react-router-dom";
+
 const Profile = () => {
   let theme = useOutletContext();
+  async function logoutHandler() {
+    let sure = window.confirm("Are you sure?");
+    if (sure) {
+      try {
+        let response = await fetch("http://localhost:3333/userLogout", {
+          method: "GET",
+          credentials: "include",
+        });
+        let data = await response.json();
+        if (!response.ok) {
+          alert(data.message);
+        } else {
+          localStorage.removeItem("u_type");
+          alert(data.message);
+          window.location.href = "/";
+        }
+      } catch (err) {
+        console.log(err.message);
+        alert(err.message);
+      }
+    }
+  }
   return (
     <main
       className={`flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
@@ -17,6 +40,9 @@ const Profile = () => {
           }
         />
       </h2>
+      <button className="bg-red-500 p-2 rounded-lg" onClick={logoutHandler}>
+        LogOut
+      </button>
     </main>
   );
 };
