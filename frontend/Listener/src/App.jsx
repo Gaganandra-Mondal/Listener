@@ -113,6 +113,7 @@ const App = () => {
         audioRef={audioRef}
         songToggle={songToggle}
         songPlay={songPlay}
+        songs={songs}
         currentSong={currentSong}
       />
     </div>
