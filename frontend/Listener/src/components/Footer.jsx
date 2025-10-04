@@ -11,17 +11,23 @@ import {
 import { useState } from "react";
 import FloatingPlayer from "./FloatingPlayer";
 
-const Footer = ({ theme }) => {
+const Footer = ({ theme, audioRef, songPlay, songToggle, currentSong }) => {
   const [mute, setMute] = useState(false);
-  const [control, setControl] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
+
+  function backwardHandler() {
+    // console.log(audioRef.current.currentTime);
+    audioRef.current.currentTime -= 10;
+  }
+
+  function forwardHandler() {
+    // console.log(audioRef.current.currentTime);
+    audioRef.current.currentTime += 10;
+  }
 
   function muteHandler() {
     setMute(!mute);
-  }
-
-  function playHandler() {
-    setControl(!control);
+    audioRef.current.muted = !mute;
   }
 
   return (
@@ -30,8 +36,9 @@ const Footer = ({ theme }) => {
       {showPlayer && (
         <FloatingPlayer
           theme={theme}
-          control={control}
-          setControl={setControl}
+          control={songToggle[audioRef.current.src]}
+          audioRef={audioRef}
+          songPlay={songPlay}
           mute={mute}
           setMute={setMute}
           onClose={() => setShowPlayer(false)}
@@ -47,12 +54,20 @@ const Footer = ({ theme }) => {
           onClick={() => setShowPlayer(true)}
           className={`flex items-center gap-2 md:gap-3 min-w-0 flex-1 md:flex-none cursor-pointer`}
         >
-          <div className="w-10 h-10 md:w-12 md:h-12 rounded-md bg-gradient-to-br from-red-600 to-red-900 flex-shrink-0"></div>
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-md bg-gradient-to-br from-red-600 to-red-900 flex-shrink-0">
+            <img
+              className="w-10 h-10 md:w-12 md:h-12 rounded-md"
+              src={currentSong.img}
+              alt=""
+            />
+          </div>
           <div className="min-w-0">
             <h4 className={`text-${theme.text} font-semibold text-sm truncate`}>
-              Midnight Symphony
+              {currentSong.sname || "No song playing"}
             </h4>
-            <p className="text-gray-400 text-xs truncate">Orchestral Beats</p>
+            <p className="text-gray-400 text-xs truncate">
+              {currentSong.aname || "Orcestral Band"}
+            </p>
           </div>
         </div>
 
@@ -64,16 +79,24 @@ const Footer = ({ theme }) => {
             <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
               <FaSync />
             </button>
-            <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+            <button
+              onClick={backwardHandler}
+              className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center"
+            >
               <FaBackward />
             </button>
             <button
-              onClick={playHandler}
+              onClick={() => {
+                songPlay(audioRef.current.src);
+              }}
               className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-600 flex items-center justify-center text-white"
             >
-              {control ? <FaPause /> : <FaPlay />}
+              {songToggle[audioRef.current.src] ? <FaPause /> : <FaPlay />}
             </button>
-            <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+            <button
+              onClick={forwardHandler}
+              className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center"
+            >
               <FaForward />
             </button>
             <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
