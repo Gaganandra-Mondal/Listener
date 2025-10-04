@@ -2,18 +2,6 @@ import { useEffect, useState } from "react";
 import { FaPlay, FaUserPlus, FaUserMinus, FaMusic } from "react-icons/fa";
 import { useOutletContext, useParams } from "react-router-dom";
 
-const mockArtist = {
-  name: "Arijit Singh",
-  avatar:
-    "https://static.toiimg.com/thumb/resizemode-4,width-1200,height-900,msid-53685247/53685247.jpg",
-  followers: 12000,
-  songs: [
-    { id: 1, title: "Midnight Drive", duration: "3:45" },
-    { id: 2, title: "Echoes", duration: "4:12" },
-    { id: 3, title: "Sunset Boulevard", duration: "3:58" },
-  ],
-};
-
 const UserViewSingerProfile = () => {
   let theme = useOutletContext();
   const { sid } = useParams();
@@ -24,6 +12,7 @@ const UserViewSingerProfile = () => {
     img: "",
     followers: 0,
   });
+  const [mockArtist,setMockArtist] = useState([{}]);
 
   const handleFollow = () => setIsFollowing((prev) => !prev);
 
@@ -53,7 +42,22 @@ const UserViewSingerProfile = () => {
         // console.log(data.message);
         setArtistDetails(data.message);
       }
+      async function getArtistDetails2() {
+        const response = await fetch(`http://localhost:3333/singer2/${sid}`, {
+          method: "GET",
+          credentials: "include",
+        });
+        if (!response.ok) {
+          let data = await response.json();
+          alert(data.message);
+          return;
+        }
+        const data = await response.json();
+        // console.log(data.message);
+        setMockArtist(data.message);
+      }
       getArtistDetails();
+      getArtistDetails2();
     } catch (err) {
       console.log(err.message);
     }
@@ -113,14 +117,14 @@ const UserViewSingerProfile = () => {
       <div className="max-w-2xl mx-auto">
         <h2 className="text-xl font-bold mb-4 text-red-400">Songs</h2>
         <ul className="space-y-4">
-          {mockArtist.songs.map((song) => (
+          {mockArtist.map((song) => (
             <li
               key={song.id}
               className="flex flex-row gap-2 items-center justify-between px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition-all duration-200 hover:border-red-600 hover:bg-gray-100 dark:hover:bg-white/10 text-left w-full"
             >
               <div>
                 <span className={`text-lg font-medium text-${theme.text}`}>
-                  {song.title}
+                  {song.name}
                 </span>
                 <span className={`ml-4 text-${theme.hoverText} `}>
                   {song.duration}
