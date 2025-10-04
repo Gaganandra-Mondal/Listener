@@ -12,7 +12,7 @@ const UserViewSingerProfile = () => {
     img: "",
     followers: 0,
   });
-  const [mockArtist,setMockArtist] = useState([{}]);
+  const [mockArtist, setMockArtist] = useState([]);
 
   const handleFollow = () => setIsFollowing((prev) => !prev);
 
