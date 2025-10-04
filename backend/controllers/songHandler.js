@@ -7,7 +7,7 @@ const songHandler = async (req, res) => {
         if (!id) {
             return res.status(400).json({ message: "Bad Request" });
         }
-        let { rows } = await pool.query("SELECT s.name, s.img, s.url, s.duration, a.name from songs s, artists a where s.aid = a.id and s.id = $1;", [id]);
+        let { rows } = await pool.query("SELECT s.name as name, s.img as img, s.url as url, s.genre as genre, s.duration as duration, a.name as aname from songs s, artists a where s.aid = a.id and s.id = $1;", [id]);
         if (rows.length > 0) {
             res.status(200).json({ message: rows[0] });
         } else {

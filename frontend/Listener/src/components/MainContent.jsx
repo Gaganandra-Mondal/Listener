@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import { FaPause, FaPlay } from "react-icons/fa";
+import { useOutletContext, Link } from "react-router-dom";
+// import { FaPause, FaPlay } from "react-icons/fa";
 
 const MainContent = () => {
-  let { theme, audioRef } = useOutletContext();
+  let { theme, songToggle } = useOutletContext();
   let [songs, setSongs] = useState([]);
-  let [songToggle, setSongToggle] = useState({});
   useEffect(() => {
     async function getSongs() {
       let response = await fetch("http://localhost:3333/");
@@ -26,36 +25,36 @@ const MainContent = () => {
     // };
   }, []);
 
-  function songPlay(url) {
-    // Stop any currently playing audio
-    if (!audioRef.current) return;
+  // function songPlay(url) {
+  //   // Stop any currently playing audio
+  //   if (!audioRef.current) return;
 
-    if (audioRef.current.src === url && !audioRef.current.paused) {
-      console.log("Same");
-      audioRef.current.pause();
-      setSongToggle((prev) => {
-        return {
-          ...prev,
-          [audioRef.current.src]: !prev[audioRef.current.src],
-        };
-      });
-      return;
-    }
+  //   if (audioRef.current.src === url && !audioRef.current.paused) {
+  //     console.log("Same");
+  //     audioRef.current.pause();
+  //     setSongToggle((prev) => {
+  //       return {
+  //         ...prev,
+  //         [audioRef.current.src]: !prev[audioRef.current.src],
+  //       };
+  //     });
+  //     return;
+  //   }
 
-    setSongToggle((prev) => {
-      let newState = {};
-      for (let key in prev) {
-        newState[key] = false;
-      }
-      newState[url] = true;
-      return { ...newState };
-    });
+  //   setSongToggle((prev) => {
+  //     let newState = {};
+  //     for (let key in prev) {
+  //       newState[key] = false;
+  //     }
+  //     newState[url] = true;
+  //     return { ...newState };
+  //   });
 
-    audioRef.current.pause();
-    audioRef.current.src = url;
-    audioRef.current.currentTime = 0;
-    audioRef.current.play();
-  }
+  //   audioRef.current.pause();
+  //   audioRef.current.src = url;
+  //   audioRef.current.currentTime = 0;
+  //   audioRef.current.play();
+  // }
 
   return (
     <main
@@ -117,19 +116,20 @@ const MainContent = () => {
                 backgroundRepeat: "no-repeat",
               }}
             >
-              {/* Dark overlay for readability */}
-              <div
-                className={`absolute inset-0 bg-${theme.background}/50 group-hover:bg${theme.background}/40 transition-all duration-300`}
-              ></div>
+              <Link to={`/songs/${song.sid}`} key={i}>
+                {/* Dark overlay for readability */}
+                <div
+                  className={`absolute inset-0 bg-${theme.background}/50 group-hover:bg${theme.background}/40 transition-all duration-300`}
+                ></div>
 
-              {/* Content container */}
-              <div className="relative h-full flex flex-col justify-between p-4 text-white">
-                {/* Top section - Genre badge */}
-                <div className="flex justify-between items-start">
-                  <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                    <span className="text-xs font-medium">{song.genre}</span>
-                  </div>
-                  <div>
+                {/* Content container */}
+                <div className="relative h-full flex flex-col justify-between p-4 text-white">
+                  {/* Top section - Genre badge */}
+                  <div className="flex justify-between items-start">
+                    <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                      <span className="text-xs font-medium">{song.genre}</span>
+                    </div>
+                    {/* <div>
                     <button
                       className="bg-red-500 p-2 rounded-lg"
                       onClick={() => {
@@ -138,20 +138,28 @@ const MainContent = () => {
                     >
                       {songToggle[song.url] ? <FaPause /> : <FaPlay />}
                     </button>
+                  </div> */}
+                    <div className="px-3 py-1 rounded-full bg-black/40 text-white text-sm font-medium  inline-block  mt-3  shadow-sm ">
+                      {songToggle[song.url] ? "Playing..." : ""}
+                    </div>
+                  </div>
+
+                  {/* Bottom section - Song info */}
+                  <div className="space-y-1">
+                    <h3
+                      className={`font-semibold truncate ${size.contentSize}`}
+                    >
+                      {song.sname}
+                    </h3>
+                    <p className="text-white/80 text-xs truncate">
+                      {song.aname}
+                    </p>
                   </div>
                 </div>
 
-                {/* Bottom section - Song info */}
-                <div className="space-y-1">
-                  <h3 className={`font-semibold truncate ${size.contentSize}`}>
-                    {song.sname}
-                  </h3>
-                  <p className="text-white/80 text-xs truncate">{song.aname}</p>
-                </div>
-              </div>
-
-              {/* Subtle gradient border effect */}
-              <div className="absolute inset-0 rounded-2xl border-4 border-transparent bg-gradient-to-br from-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                {/* Subtle gradient border effect */}
+                <div className="absolute inset-0 rounded-2xl border-4 border-transparent bg-gradient-to-br from-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </Link>
             </div>
           );
         })}

@@ -15,6 +15,7 @@ import UserRegister from "./components/UserRegister.jsx";
 import SingerLogin from "./components/SingerLogin.jsx";
 import SingerRegister from "./components/SingerRegister.jsx";
 import UserViewSingerProfile from "./components/userViewSingerProfile.jsx";
+import Song from "./components/Song.jsx";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "singer/:sid",
         element: <UserViewSingerProfile />,
+      },
+      {
+        path: "songs/:id",
+        element: <Song />,
       },
     ],
   },
