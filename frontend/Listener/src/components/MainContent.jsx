@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import Playing from "./Playing";
 // import { FaPause, FaPlay } from "react-icons/fa";
 
 const MainContent = () => {
-  let { theme, songToggle } = useOutletContext();
-  let [songs, setSongs] = useState([]);
-  useEffect(() => {
-    async function getSongs() {
-      let response = await fetch("http://localhost:3333/");
-      let data = await response.json();
-      setSongs(data.message);
-    }
-    getSongs();
+  let { theme, songToggle, songs } = useOutletContext();
+  // useEffect(() => {
+  //   async function getSongs() {
+  //     let response = await fetch("http://localhost:3333/");
+  //     let data = await response.json();
+  //     setSongs(data.message);
+  //   }
+  //   getSongs();
 
-    // // Create a single reusable audio element
-    // audioRef.current = new Audio();
+  // // Create a single reusable audio element
+  // audioRef.current = new Audio();
 
-    // // Clean up when component unmounts
-    // return () => {
-    //   if (audioRef.current) {
-    //     audioRef.current.pause();
-    //     audioRef.current = null;
-    //   }
-    // };
-  }, []);
+  // // Clean up when component unmounts
+  // return () => {
+  //   if (audioRef.current) {
+  //     audioRef.current.pause();
+  //     audioRef.current = null;
+  //   }
+  // };
+  // }, []);
 
   // function songPlay(url) {
   //   // Stop any currently playing audio

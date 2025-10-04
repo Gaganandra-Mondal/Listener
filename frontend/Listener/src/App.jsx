@@ -3,14 +3,38 @@ import SideBarLeft from "./components/SideBarLeft";
 import SideBarRight from "./components/SideBarRight";
 import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const App = () => {
   const audioRef = useRef(new Audio());
   let [songToggle, setSongToggle] = useState({});
+  let [songs, setSongs] = useState([]);
+  let [currentSong, setCurrentSong] = useState({});
+  useEffect(() => {
+    async function getSongs() {
+      try {
+        let response = await fetch("http://localhost:3333/");
+        let data = await response.json();
+        setSongs(data.message);
+      } catch (error) {
+        console.error("Error fetching songs:", error);
+        setSongs([]);
+      }
+    }
+    getSongs();
+  }, []);
+
   function songPlay(url) {
     // Stop any currently playing audio
     if (!audioRef.current) return;
+
+    for (let song of songs) {
+      if (song.url === url) {
+        // console.log("Found song:", song);
+        setCurrentSong(song);
+        break;
+      }
+    }
 
     if (audioRef.current.src === url && !audioRef.current.paused) {
       console.log("Same");
@@ -76,7 +100,7 @@ const App = () => {
           songToggle={songToggle}
           songPlay={songPlay}
         />
-        <Outlet context={{ theme, audioRef, songToggle, songPlay }} />
+        <Outlet context={{ theme, audioRef, songToggle, songPlay, songs }} />
         <SideBarRight
           theme={theme}
           audioRef={audioRef}
@@ -89,6 +113,7 @@ const App = () => {
         audioRef={audioRef}
         songToggle={songToggle}
         songPlay={songPlay}
+        currentSong={currentSong}
       />
     </div>
   );
