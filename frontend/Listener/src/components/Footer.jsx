@@ -11,18 +11,40 @@ import {
 import { useState } from "react";
 import FloatingPlayer from "./FloatingPlayer";
 
-const Footer = ({ theme, audioRef, songPlay, songToggle, currentSong }) => {
+const Footer = ({
+  theme,
+  audioRef,
+  songPlay,
+  songToggle,
+  currentSong,
+  songs,
+}) => {
   const [mute, setMute] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
 
   function backwardHandler() {
     // console.log(audioRef.current.currentTime);
-    audioRef.current.currentTime -= 10;
+    let currentIndex = -1;
+    for (let song of songs) {
+      if (song.url === audioRef.current.src) {
+        currentIndex = songs.indexOf(song);
+        break;
+      }
+    }
+    currentIndex = currentIndex === 0 ? songs.length - 1 : currentIndex;
+    console.log("Current Index:", songs[currentIndex]);
+    songPlay(songs[currentIndex - 1].url);
   }
 
   function forwardHandler() {
     // console.log(audioRef.current.currentTime);
-    audioRef.current.currentTime += 10;
+    // audioRef.current.currentTime += 10;
+    let currentIndex = songs.indexOf(currentSong);
+    if (currentIndex === songs.length - 1) {
+      songPlay(songs[0].url);
+    } else {
+      songPlay(songs[currentIndex + 1].url);
+    }
   }
 
   function muteHandler() {

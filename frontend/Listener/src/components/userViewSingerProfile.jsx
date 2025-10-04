@@ -117,7 +117,9 @@ const UserViewSingerProfile = () => {
         </div>
       </div>
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-xl font-bold mb-4 text-red-400">Songs</h2>
+        <h2 className="text-xl font-bold mb-4 text-red-400">
+          Songs ({mockArtist.length})
+        </h2>
         {mockArtist.length === 0 && (
           <p className="text-center text-gray-500">No songs available.</p>
         )}
