@@ -48,8 +48,9 @@ const UserViewSingerProfile = () => {
           credentials: "include",
         });
         if (!response.ok) {
-          let data = await response.json();
-          alert(data.message);
+          // let data = await response.json();
+          // alert(data.message);
+          setMockArtist([]);
           return;
         }
         const data = await response.json();
@@ -60,6 +61,7 @@ const UserViewSingerProfile = () => {
       getArtistDetails2();
     } catch (err) {
       console.log(err.message);
+      setMockArtist([]);
     }
   }, [sid]);
 
@@ -116,8 +118,11 @@ const UserViewSingerProfile = () => {
       </div>
       <div className="max-w-2xl mx-auto">
         <h2 className="text-xl font-bold mb-4 text-red-400">Songs</h2>
+        {mockArtist.length === 0 && (
+          <p className="text-center text-gray-500">No songs available.</p>
+        )}
         <ul className="space-y-4">
-          {mockArtist.map((song) => (
+          {mockArtist?.map((song) => (
             <li
               key={song.id}
               className="flex flex-row gap-2 items-center justify-between px-3 py-3 rounded-md cursor-pointer border-l-4 border-transparent transition-all duration-200 hover:border-red-600 hover:bg-gray-100 dark:hover:bg-white/10 text-left w-full"

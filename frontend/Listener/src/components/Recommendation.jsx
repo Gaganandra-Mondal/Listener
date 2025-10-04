@@ -1,8 +1,9 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Playing from "./Playing";
 
 const Recommendation = () => {
-  let theme = useOutletContext();
+  let { theme, songToggle } = useOutletContext();
 
   let [songs, setSongs] = useState([]);
 
@@ -97,7 +98,9 @@ const Recommendation = () => {
                 {/* Top section - Genre badge */}
                 <div className="flex justify-between items-start">
                   <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                    <span className="text-xs font-medium">{song.genre}</span>
+                    <span className="text-xs font-medium">
+                      {songToggle[song.url] ? <Playing /> : song.genre}
+                    </span>
                   </div>
                 </div>
 
