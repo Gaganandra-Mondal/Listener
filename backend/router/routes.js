@@ -25,6 +25,7 @@ import newReleasesHandler from "../controllers/newReleasesHandler.js";
 import recomendedHandler from "../controllers/recomendedHandler.js";
 import songsHandler from "../controllers/songHandler.js";
 import userViewSingerHandler from "../controllers/userViewSingerHandler.js";
+import userViewSingerHandler2 from "../controllers/userViewSingerHandler2.js";
 
 const router = Router();
 
@@ -34,7 +35,8 @@ router.get("/allsingers", allsingersHandler);
 router.get("/album", albumHandler);
 router.get("/topTracks", topTracksHandler);
 router.get("/newReleases", newReleasesHandler);
-router.get("/singer/:sid", userViewSingerHandler);
+router.get("/singer/:sid", userViewSingerHandler); // for fetching name, img, followers
+router.get("/singer2/:sid", userViewSingerHandler2); // for fetching songs of singer
 
 // Protected routes
 router.get("/userProfile", verifier, userHandler);
