@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOutletContext, Link } from "react-router-dom";
+import Playing from "./Playing";
 // import { FaPause, FaPlay } from "react-icons/fa";
 
 const MainContent = () => {
@@ -127,7 +128,9 @@ const MainContent = () => {
                   {/* Top section - Genre badge */}
                   <div className="flex justify-between items-start">
                     <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                      <span className="text-xs font-medium">{song.genre}</span>
+                      <span className="text-xs font-medium">
+                        {songToggle[song.url] ? <Playing /> : song.genre}
+                      </span>
                     </div>
                     {/* <div>
                     <button
@@ -139,11 +142,7 @@ const MainContent = () => {
                       {songToggle[song.url] ? <FaPause /> : <FaPlay />}
                     </button>
                   </div> */}
-                    <div className="px-3 py-1 rounded-full bg-black/40 text-white text-sm font-medium  inline-block  mt-3  shadow-sm ">
-                      {songToggle[song.url] ? "Playing..." : ""}
-                    </div>
                   </div>
-
                   {/* Bottom section - Song info */}
                   <div className="space-y-1">
                     <h3
