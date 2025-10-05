@@ -5,7 +5,7 @@ import { FaPause, FaPlay } from "react-icons/fa";
 const Song = () => {
   let { id } = useParams();
   let [song, setSong] = useState({});
-  let { songToggle, songPlay } = useOutletContext();
+  let { theme ,songToggle, songPlay } = useOutletContext();
 
   // Track screen width for responsive design
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -40,151 +40,117 @@ const Song = () => {
 
   return (
     <div
-      style={{
-        width: "90%",
-        maxWidth: isSmall ? "95%" : "700px",
-        minWidth: "300px",
-        margin: "2rem auto",
-        padding: isSmall ? "1.8rem 1.5rem" : "2.5rem 2rem",
-        borderRadius: "24px",
-        background: "linear-gradient(135deg, #111 0%, #191919 100%)",
-        color: "#fff",
-        position: "relative",
-        boxShadow: "0 10px 40px rgba(0, 0, 0, 0.7)",
-      }}
-    >
-      <div
+  className={`rounded-3xl bg-${theme.background} text-${theme.text} relative shadow-2xl`}
+  style={{
+    width: "100%",
+    maxWidth: isSmall ? "100%" : "900px",
+    minWidth: "300px",
+    padding: isSmall ? "1.8rem 1.5rem" : "2.5rem 2rem",
+  }}
+>
+  <div
+    className={`flex ${
+      isSmall ? "flex-col items-center" : "flex-row items-center"
+    } justify-between gap-6`}
+  >
+    {/* Album Art */}
+    {song.img && (
+      <img
+        src={song.img}
+        alt={song.name}
+        className={`rounded-xl bg-${theme.background} border-2 border-[rgba(255,23,68,0.35)] shadow-lg flex-shrink-0 object-cover`}
         style={{
-          display: "flex",
-          flexDirection: isSmall ? "column" : "row",
-          alignItems: isSmall ? "center" : "center",
-          justifyContent: "space-between",
-          gap: isSmall ? "1.2rem" : "1.5rem",
+          width: `${albumSize}px`,
+          height: `${albumSize}px`,
         }}
-      >
-        {/* Album Art */}
-        {song.img && (
-          <img
-            src={song.img}
-            alt={song.name}
-            style={{
-              width: `${albumSize}px`,
-              height: `${albumSize}px`,
-              borderRadius: "14px",
-              objectFit: "cover",
-              background: "#222",
-              border: "2px solid rgba(255, 23, 68, 0.35)",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.7)",
-              flexShrink: 0,
-            }}
-          />
-        )}
+      />
+    )}
 
-        {/* Song Info */}
-        <div
-          style={{
-            flex: 1,
-            textAlign: isSmall ? "center" : "left",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "0.8rem",
-              color: "#ff3b3b",
-              letterSpacing: "2px",
-              fontWeight: 600,
-              opacity: 0.8,
-            }}
-          >
-            SONG
-          </div>
-
-          <h1
-            style={{
-              margin: "0.5rem 0 0.25rem",
-              fontSize: isSmall ? "1.8rem" : "2.4rem",
-              fontWeight: 700,
-              color: "#fff",
-            }}
-          >
-            {song.name}
-          </h1>
-
-          <h2
-            style={{
-              margin: 0,
-              fontSize: isSmall ? "1rem" : "1.2rem",
-              color: "#999",
-              fontWeight: 500,
-            }}
-          >
-            {song.aname}
-          </h2>
-
-          <div
-            style={{
-              marginTop: "0.75rem",
-              fontSize: isSmall ? "0.95rem" : "1.05rem",
-              color: "#ff3b3b",
-              fontWeight: 600,
-              opacity: 0.7,
-            }}
-          >
-            {song.genre}
-          </div>
-        </div>
-
-        {/* Play Button */}
-        <button
-          onClick={() => songPlay(song.url)}
-          style={{
-            background: "#ff1744",
-            border: "none",
-            borderRadius: "50%",
-            width: `${buttonSize}px`,
-            height: `${buttonSize}px`,
-            marginLeft: isSmall ? "0" : "0.5rem",
-            marginTop: isSmall ? "1rem" : "0",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: isSmall ? "1.1rem" : "1.3rem",
-            color: "#fff",
-            cursor: "pointer",
-            boxShadow: "0 6px 20px rgba(255, 23, 68, 0.5)",
-            transition: "transform 0.2s ease, box-shadow 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.08)";
-            e.currentTarget.style.boxShadow =
-              "0 8px 28px rgba(255, 23, 68, 0.7)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.boxShadow =
-              "0 6px 20px rgba(255, 23, 68, 0.5)";
-          }}
-        >
-          {songToggle[song.url] ? <FaPause /> : <FaPlay />}
-        </button>
+    {/* Song Info */}
+    <div
+      className={`flex-1 ${isSmall ? "text-center" : "text-left"}`}
+    >
+      <div className="text-xs text-[#ff3b3b] tracking-wider font-semibold opacity-80">
+        SONG
       </div>
 
-      {/* Glow Circle */}
+      <h1
+        className={`font-bold text-${theme.text} ${
+          isSmall ? "text-2xl mt-2 mb-1" : "text-3xl mt-2 mb-1"
+        }`}
+      >
+        {song.name}
+      </h1>
+
+      <h2
+        className={`text-[#999] font-medium ${
+          isSmall ? "text-base" : "text-xl"
+        }`}
+      >
+        {song.aname}
+      </h2>
+
       <div
-        style={{
-          position: "absolute",
-          right: "-70px",
-          bottom: "-70px",
-          width: "200px",
-          height: "200px",
-          background:
-            "radial-gradient(circle, rgba(255,23,68,0.12), transparent)",
-          borderRadius: "50%",
-          filter: "blur(45px)",
-          zIndex: 0,
-        }}
-      ></div>
+        className={`text-[#ff3b3b] font-semibold opacity-70 ${
+          isSmall ? "text-sm mt-3" : "text-base mt-3"
+        }`}
+      >
+        {song.genre}
+      </div>
     </div>
+
+    {/* Play Button */}
+    <button
+      onClick={() => songPlay(song.url)}
+      className={`
+        bg-[#ff1744] rounded-full flex items-center justify-center text-white cursor-pointer
+        transition-all duration-200 ease-in-out hover:scale-105
+        shadow-[0_6px_20px_rgba(255,23,68,0.5)] hover:shadow-[0_8px_28px_rgba(255,23,68,0.7)]
+        ${isSmall ? "mx-auto mt-4" : "ml-2"}
+      `}
+      style={{
+        width: `${buttonSize}px`,
+        height: `${buttonSize}px`,
+        fontSize: isSmall ? "1.1rem" : "1.3rem",
+      }}
+    >
+      {songToggle[song.url] ? <FaPause /> : <FaPlay />}
+    </button>
+  </div>
+
+  {/* Lyrics Section */}
+  {song.lyrics && (
+    <div className="mt-6">
+      <div className="text-xs text-[#ff3b3b] tracking-wider font-semibold opacity-80 mb-3">
+        LYRICS
+      </div>
+      <div
+        className={`text-${theme.text}/50 text-base leading-7 overflow-y-auto`} 
+        style={{
+          maxHeight: isSmall ? "200px" : "250px",
+          scrollbarWidth: 'thin',
+          scrollbarColor: 'red transparent',
+        }}
+      >
+        <div className="whitespace-pre-line">
+          {song.lyrics}
+        </div>
+      </div>
+    </div>
+  )}
+
+  {/* Glow Circle
+  <div
+    className="absolute rounded-full blur-3xl -z-10"
+    style={{
+      right: "-70px",
+      bottom: "-70px",
+      width: "200px",
+      height: "200px",
+      background: "radial-gradient(circle, rgba(255,23,68,0.12), transparent)",
+    }}
+  ></div> */}
+</div>
   );
 };
 
