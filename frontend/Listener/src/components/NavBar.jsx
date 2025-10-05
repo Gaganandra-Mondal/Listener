@@ -9,6 +9,59 @@ const NavBar = ({ theme, toggleTheme }) => {
   const [session, setSession] = useState(false);
   const [btntheme, setbtnTheme] = useState(false);
   const [profile, setProfile] = useState("U");
+  const [searchArea, setSearchArea] = useState(false);
+  const [searchData, setSearchData] = useState("");
+  const [search, setSearch] = useState([]);
+  // const [search, setSearch] = useState([
+  //   {
+  //     id: 1,
+  //     name: "Song 1",
+  //     img: "https://klkpybbgsjpkgwurrxkw.supabase.co/storage/v1/object/public/images/Haseen.jpg",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Song 2",
+  //     img: "https://klkpybbgsjpkgwurrxkw.supabase.co/storage/v1/object/public/images/Ami_sei_manus_ta_ar_nei.jpg",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Song 3",
+  //     img: "https://www.ilyricshub.com/wp-content/uploads/2022/11/4-din-mc-square-448x245.jpg",
+  //   },
+  // ]);
+
+  useEffect(() => {
+    let id = null;
+    setSearch([]);
+    function fetchSearchSong() {
+      if (searchData.length > 0) {
+        id = setTimeout(async () => {
+          try {
+            let response = await fetch("http://localhost:3333/search", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ searchData }),
+              credentials: "include",
+            });
+            if (response.ok) {
+              let data = await response.json();
+              setSearch(data.message);
+            } else {
+              setSearch([]);
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
+        }, 200);
+      }
+    }
+    fetchSearchSong();
+    return () => {
+      clearTimeout(id);
+    };
+  }, [searchData]);
 
   useEffect(() => {
     async function fetchSessionStatus() {
@@ -35,9 +88,7 @@ const NavBar = ({ theme, toggleTheme }) => {
           if (response.ok) {
             setSession(true);
             setProfile(data.message.name[0].toUpperCase());
-          } // else {
-          //   alert(data.message);
-          // }
+          }
         }
       } catch (err) {
         console.log(err.message);
@@ -111,7 +162,23 @@ const NavBar = ({ theme, toggleTheme }) => {
         <div className="relative">
           <input
             type="text"
+            onBlur={() => {
+              setTimeout(() => {
+                setSearch([]);
+                setSearchArea(false);
+              }, 500);
+            }}
             placeholder="Search..."
+            onChange={(e) => {
+              if (e.target.value.length > 0) {
+                setSearchArea(true);
+              } else {
+                setSearchArea(false);
+              }
+              // console.log(e.target.value);
+              setSearchData(e.target.value);
+            }}
+            value={searchData}
             className={`bg-${theme.background} border border-white/10 rounded-full px-4 py-2 text-${theme.text} placeholder-gray-400 
                        focus:outline-none focus:border-red-400 
                        w-40 lg:w-44 xl:w-60 focus:w-72 
@@ -120,6 +187,41 @@ const NavBar = ({ theme, toggleTheme }) => {
           <HiSearch
             className={`absolute right-3 top-1/2 transform -translate-y-1/2 text-${theme.text}`}
           />
+          {searchArea && (
+            <div
+              className={`bg-${theme.background} text-${theme.text} 
+              absolute w-96 max-h-60 overflow-y-auto 
+              rounded-lg shadow-lg p-4`}
+            >
+              <h2 className="font-semibold mb-3">Songs</h2>
+
+              {search.length === 0 ? (
+                <p className="text-gray-400">No results found</p>
+              ) : (
+                <ul className="space-y-2">
+                  {search?.map((song) => (
+                    <li key={song.id}>
+                      <Link
+                        to={`/songs/${song.id}`}
+                        className="flex items-center gap-3 p-2 
+                   hover:bg-opacity-10 hover:bg-red-700 
+                   rounded-md cursor-pointer"
+                      >
+                        <img
+                          src={song.img}
+                          alt={song.name}
+                          className="w-12 h-12 rounded-md object-cover"
+                        />
+                        <span className="font-medium truncate">
+                          {song.name}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
         </div>
         <button
           className="cursor-pointer"
