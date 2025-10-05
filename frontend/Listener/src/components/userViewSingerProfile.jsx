@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
-import { FaPlay, FaUserPlus, FaUserMinus, FaMusic } from "react-icons/fa";
+import {
+  FaPlay,
+  FaPause,
+  FaUserPlus,
+  FaUserMinus,
+  FaMusic,
+} from "react-icons/fa";
 import { useOutletContext, useParams } from "react-router-dom";
 
 const UserViewSingerProfile = () => {
-  let theme = useOutletContext();
+  let { theme, songToggle, songPlay } = useOutletContext();
   const { sid } = useParams();
   const [isFollowing, setIsFollowing] = useState(false);
   const [playingSongId, setPlayingSongId] = useState(null);
@@ -134,20 +140,30 @@ const UserViewSingerProfile = () => {
                   {song.name}
                 </span>
                 <span className={`ml-4 text-${theme.hoverText} `}>
-                  {song.duration}
+                  {Math.floor(song.duration / 60)}:
+                  {String(song.duration % 60).padStart(2, 0)}
                 </span>
               </div>
               <button
                 className={`px-4 py-1 rounded-md font-medium bg-red-600 hover:bg-red-600/50 cursor-pointer text-white transition-colors duration-200 flex items-center gap-1 ${
                   playingSongId === song.id ? " cursor-not-allowed" : ""
                 }`}
-                onClick={() => handlePlaySong(song.id)}
+                onClick={() => {
+                  handlePlaySong(song.id);
+                  songPlay(song.url);
+                }}
                 disabled={playingSongId === song.id}
               >
-                <FaPlay
-                  className={playingSongId === song.id ? "animate-spin" : ""}
-                />
-                {playingSongId === song.id ? "Playing..." : "Play"}
+                {songToggle[song.url] ? (
+                  <FaPause
+                    className={playingSongId === song.id ? "animate-spin" : ""}
+                  />
+                ) : (
+                  <FaPlay
+                    className={playingSongId === song.id ? "animate-spin" : ""}
+                  />
+                )}
+                {songToggle[song.url] ? "Playing..." : "Play"}
               </button>
             </li>
           ))}
