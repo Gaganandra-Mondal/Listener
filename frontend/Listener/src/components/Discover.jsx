@@ -87,33 +87,39 @@ const Discover = () => {
                 backgroundRepeat: "no-repeat",
               }}
             >
-              {/* Dark overlay for readability */}
-              <div
-                className={`absolute inset-0 bg-${theme.background}/50 group-hover:bg${theme.background}/40 transition-all duration-300`}
-              ></div>
+              <Link to={`/songs/${song.sid}`}>
+                {/* Dark overlay for readability */}
+                <div
+                  className={`absolute inset-0 bg-${theme.background}/50 group-hover:bg${theme.background}/40 transition-all duration-300`}
+                ></div>
 
-              {/* Content container */}
-              <div className="relative h-full flex flex-col justify-between p-4 text-white">
-                {/* Top section - Genre badge */}
-                <div className="flex justify-between items-start">
-                  <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                    <span className="text-xs font-medium">
-                      {songToggle[song.url] ? <Playing /> : song.genre}
-                    </span>
+                {/* Content container */}
+                <div className="relative h-full flex flex-col justify-between p-4 text-white">
+                  {/* Top section - Genre badge */}
+                  <div className="flex justify-between items-start">
+                    <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                      <span className="text-xs font-medium">
+                        {songToggle[song.url] ? <Playing /> : song.genre}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Bottom section - Song info */}
+                  <div className="space-y-1">
+                    <h3
+                      className={`font-semibold truncate ${size.contentSize}`}
+                    >
+                      {song.sname}
+                    </h3>
+                    <p className="text-white/80 text-xs truncate">
+                      {song.aname}
+                    </p>
                   </div>
                 </div>
 
-                {/* Bottom section - Song info */}
-                <div className="space-y-1">
-                  <h3 className={`font-semibold truncate ${size.contentSize}`}>
-                    {song.sname}
-                  </h3>
-                  <p className="text-white/80 text-xs truncate">{song.aname}</p>
-                </div>
-              </div>
-
-              {/* Subtle gradient border effect */}
-              <div className="absolute inset-0 rounded-2xl border-4 border-transparent bg-gradient-to-br from-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                {/* Subtle gradient border effect */}
+                <div className="absolute inset-0 rounded-2xl border-4 border-transparent bg-gradient-to-br from-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </Link>
             </div>
           );
         })}

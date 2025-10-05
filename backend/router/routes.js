@@ -13,7 +13,6 @@ import singerHandler from "../controllers/singerHandler.js";
 import allsingersHandler from "../controllers/allsingersHandler.js";
 import singerRegisterHandler from "../controllers/singerRegisterHandler.js";
 import singerLoginHandler from "../controllers/singerLoginHandler.js";
-import singerLogoutHandler from "../controllers/singerLogoutHandler.js";
 import { upload } from "../controllers/uploadHandler.js";
 import uploadHandler from "../controllers/uploadHandler.js";
 import likeHandler from "../controllers/likeHandler.js";
@@ -26,6 +25,7 @@ import recomendedHandler from "../controllers/recomendedHandler.js";
 import songsHandler from "../controllers/songHandler.js";
 import userViewSingerHandler from "../controllers/userViewSingerHandler.js";
 import userViewSingerHandler2 from "../controllers/userViewSingerHandler2.js";
+import searchHandler from "../controllers/searchHandler.js";
 
 const router = Router();
 
@@ -65,5 +65,7 @@ router.post("/likes/:id", verifier, likeHandler);
 router.post("/dislikes/:id", verifier, dislikeHandler);
 router.post("/follows/:id", verifier, followHandler);
 router.post("/unfollows/:id", verifier, unfollowHandler);
+
+router.post("/search", verifier, searchHandler);
 
 export default router;

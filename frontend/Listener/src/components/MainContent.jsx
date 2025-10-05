@@ -116,7 +116,7 @@ const MainContent = () => {
                 backgroundRepeat: "no-repeat",
               }}
             >
-              <Link to={`/songs/${song.sid}`} key={i}>
+              <Link to={`/songs/${song.sid}`}>
                 {/* Dark overlay for readability */}
                 <div
                   className={`absolute inset-0 bg-${theme.background}/50 group-hover:bg${theme.background}/40 transition-all duration-300`}
