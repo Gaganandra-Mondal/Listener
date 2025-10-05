@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(router);
 
 try {
-    const connection = await pool.connect();
+    const connection = await pool.connect(); 
     connection.release();
     print("DataBase connected.");
     app.listen(PORT, () => {

@@ -73,14 +73,14 @@ const UserViewSingerProfile = () => {
 
   return (
     <div
-      className={`min-h-screen w-full bg-${theme.background} text-${theme.text} font-sans px-6 py-10 overflow-x-hidden`}
+      className={`h-full w-full bg-${theme.background} text-${theme.text} font-sans px-6 py-10 overflow-x-hidden overflow-y-auto`}
     >
       <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
         <div className="relative flex-shrink-0">
           <img
             src={ArtistDetails.img}
             alt="Artist Avatar"
-            className="w-40 h-40 rounded-full object-cover shadow-2xl border-8 border-black"
+            className={`w-40 h-40 rounded-full object-cover shadow-2xl border-8 border-black`}
             style={{
               boxShadow:
                 "0 8px 32px 0 rgba(0,0,0,0.7), 0 1.5px 8px 0 rgba(255,0,0,0.15)",

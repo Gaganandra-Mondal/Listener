@@ -69,16 +69,16 @@ const Footer = ({
 
       {/* Footer */}
       <footer
-        className={`bg-${theme.background} text-${theme.text} border-t border-white/5 rounded-t-xl shadow-inner px-3 py-3 md:px-4 flex flex-col md:flex-row items-center justify-between gap-3 sticky bottom-0 z-50`}
+        className={`bg-${theme.background} text-${theme.text} border-t border-white/5 rounded-t-xl shadow-inner px-3 py-3 md:px-4 flex flex-col md:flex-row items-center justify-between gap-3 sticky bottom-0 left-0 right-0 z-50`}
       >
         {/* Track Info (👉 only this opens floating player) */}
         <div
           onClick={() => setShowPlayer(true)}
-          className={`flex items-center gap-2 md:gap-3 min-w-0 flex-1 md:flex-none cursor-pointer`}
+          className={`flex gap-2 md:gap-3 flex-1 md:flex-none cursor-pointer`}
         >
-          <div className="w-10 h-10 md:w-12 md:h-12 rounded-md bg-gradient-to-br from-red-600 to-red-900 flex-shrink-0">
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded bg-gradient-to-br from-red-600 to-red-900 flex-shrink-0">
             <img
-              className="w-10 h-10 md:w-12 md:h-12 rounded-md"
+              className="w-full h-full md:w-12 lg:w-full rounded-md"
               src={currentSong.img}
               alt=""
             />
@@ -98,12 +98,12 @@ const Footer = ({
           className={`flex text-${theme.text} flex-col items-center flex-1 w-full md:w-auto order-3 md:order-2`}
         >
           <div className="flex items-center gap-4 md:gap-5 mb-4 md:mb-2">
-            <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+            <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer">
               <FaSync />
             </button>
             <button
               onClick={backwardHandler}
-              className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center"
+              className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer"
             >
               <FaBackward />
             </button>
@@ -111,17 +111,17 @@ const Footer = ({
               onClick={() => {
                 songPlay(audioRef.current.src);
               }}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-600 flex items-center justify-center text-white"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-600 flex items-center justify-center text-white cursor-pointer"
             >
               {songToggle[audioRef.current.src] ? <FaPause /> : <FaPlay />}
             </button>
             <button
               onClick={forwardHandler}
-              className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center"
+              className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer"
             >
               <FaForward />
             </button>
-            <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+            <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer">
               <FaRandom />
             </button>
           </div>
@@ -129,9 +129,9 @@ const Footer = ({
 
         {/* Volume */}
         <div
-          className={`flex items-center gap-2 order-2 md:order-3 md:flex-none`}
+          className={`flex items-center gap-2 order-3 md:order-3 `}
         >
-          <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+          <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer">
             {mute ? (
               <FaVolumeOff onClick={muteHandler} />
             ) : (
