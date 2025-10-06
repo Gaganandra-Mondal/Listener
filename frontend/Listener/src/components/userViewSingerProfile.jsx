@@ -73,7 +73,7 @@ const UserViewSingerProfile = () => {
 
   return (
     <div
-      className={`h-full w-full bg-${theme.background} text-${theme.text} font-sans px-6 py-10 overflow-x-hidden overflow-y-auto`}
+      className={` h-screen overflow-y-auto w-full bg-${theme.background} text-${theme.text} font-sans px-6 py-10 overflow-x-hidden overflow-y-auto`}
     >
       <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
         <div className="relative flex-shrink-0">

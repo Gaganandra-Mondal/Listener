@@ -31,7 +31,7 @@ const Recommendation = () => {
 
   return (
     <main
-      className={`flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
+      className={` h-screen overflow-y-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
     >
       <section className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 auto-rows-[120px] md:auto-rows-[140px] lg:auto-rows-[160px]">
         {songs?.map((song, i) => {

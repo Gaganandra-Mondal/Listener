@@ -31,7 +31,7 @@ const Profile = () => {
   }
   return (
     <main
-      className={`flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
+      className={` h-screen overflow-y-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
     >
       <h2
         className={
