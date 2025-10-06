@@ -32,7 +32,7 @@ const SideBarLeft = ({ theme }) => {
   }, []);
 
   return (
-    <aside className="w-full lg:w-64">
+    <aside className="w-full lg:w-64  h-screen overflow-y-auto  ">
       {/* Mobile Artist Slider - Full Width */}
       <div className="lg:hidden mb-6 w-full">
         <div className="flex items-center justify-between mb-4 px-4">

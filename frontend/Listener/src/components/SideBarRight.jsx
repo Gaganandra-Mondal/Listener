@@ -21,7 +21,7 @@ const SideBarRight = ({ theme }) => {
   const themeClasses = getThemeClasses();
 
   return (
-    <aside className="w-full lg:w-64 relative">
+    <aside className=" h-screen overflow-y-auto w-full lg:w-64 relative">
       {/* Mobile Toggle */}
       <button
         className="lg:hidden flex items-center gap-2 text-white bg-red-600 px-4 py-3 rounded-lg mb-3 w-full justify-center z-40 relative"
