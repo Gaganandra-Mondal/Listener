@@ -93,7 +93,7 @@ const App = () => {
         songToggle={songToggle}
         songPlay={songPlay}
       />
-      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-3 md:p-4">
+      <div className="flex-1 flex flex-col lg:flex-row">
         <SideBarLeft
           theme={theme}
           audioRef={audioRef}

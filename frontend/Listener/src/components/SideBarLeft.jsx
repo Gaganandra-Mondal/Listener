@@ -32,7 +32,7 @@ const SideBarLeft = ({ theme }) => {
   }, []);
 
   return (
-    <aside className="w-full lg:h-full lg:w-64 lg:h-full ">
+    <aside className="w-full lg:h-full lg:w-64">
       {/* Mobile Artist Slider - Full Width */}
       <div className="lg:hidden mb-6 w-full">
         <div className="flex items-center justify-between mb-4 px-4">
@@ -74,7 +74,7 @@ const SideBarLeft = ({ theme }) => {
 
       {/* Desktop Sidebar - Vertical List */}
       <div
-        className={`hidden lg:block ${themeClasses.background} ${themeClasses.text} rounded-xl shadow-lg p-4 overflow-y-auto h-full`}
+        className={`hidden lg:block ${themeClasses.background} ${themeClasses.text} shadow-lg p-4 overflow-y-auto h-full`}
       >
         <h2 className="text-red-600 text-lg font-semibold uppercase flex items-center gap-2 mb-4">
           Artists
