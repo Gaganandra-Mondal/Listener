@@ -39,7 +39,7 @@ const SideBarRight = ({ theme }) => {
       <div
         className={`
           ${themeClasses.background} ${themeClasses.text}
-          rounded-xl shadow-lg p-4 overflow-y-auto transition-all duration-300 
+           shadow-lg p-4 overflow-y-auto transition-all duration-300 
           ${
             isOpen
               ? "fixed top-20 left-4 right-4 z-50 max-h-[80vh] overflow-y-auto"

@@ -15,12 +15,52 @@ const UserViewSingerProfile = () => {
   const [playingSongId, setPlayingSongId] = useState(null);
   const [ArtistDetails, setArtistDetails] = useState({
     name: "",
-    img: "",
+    img: "https://www.tottenhamhotspurstadium.com/media/xrhfsdgm/2v8a4968.jpg?width=960&height=582&rnd=133898957726470000",
     followers: 0,
   });
   const [mockArtist, setMockArtist] = useState([]);
 
-  const handleFollow = () => setIsFollowing((prev) => !prev);
+  const handleFollow = async () => {
+    try {
+      const response = await fetch("http://localhost:3333/sessionCheck", {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error("Not logged in");
+      } else {
+        if (isFollowing) {
+          let res = await fetch(`http://localhost:3333/unfollows/${sid}`, {
+            method: "POST",
+            credentials: "include",
+          });
+          // let resData = await res.json();
+          if (!res.ok) {
+            alert("Something went wrong. Please try again.");
+            return;
+          } else {
+            setIsFollowing((prev) => !prev);
+          }
+        } else {
+          let res = await fetch(`http://localhost:3333/follows/${sid}`, {
+            method: "POST",
+            credentials: "include",
+          });
+          // let resData = await res.json();
+          if (!res.ok) {
+            alert("Something went wrong. Please try again.");
+            return;
+          } else {
+            setIsFollowing((prev) => !prev);
+          }
+        }
+      }
+    } catch (err) {
+      console.log(err.message);
+      alert("Please login to follow/unfollow artists.");
+      return;
+    }
+  };
 
   const handlePlayAll = () => {
     setPlayingSongId("all");
@@ -69,6 +109,26 @@ const UserViewSingerProfile = () => {
       console.log(err.message);
       setMockArtist([]);
     }
+    async function checkFollowing() {
+      try {
+        const response = await fetch(
+          `http://localhost:3333/isFollowing/${sid}`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        if (!response.ok) {
+          setIsFollowing(false);
+        } else {
+          const data = await response.json();
+          setIsFollowing(data.isFollowing);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+    checkFollowing();
   }, [sid]);
 
   return (

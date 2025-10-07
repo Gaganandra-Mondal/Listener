@@ -1,12 +1,15 @@
 import { useOutletContext } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import SingerProfile from "./SingerProfile";
+import UserProfile from "./UserProfile";
 
 const Profile = () => {
   let theme = useOutletContext();
-  let [userData, setUserData] = useState({
-    name: "Listener",
-    email: "listener@gmailc.com",
-  });
+  let [profile, setProfile] = useState("");
+  useEffect(() => {
+    let useType = localStorage.getItem("u_type");
+    setProfile(useType);
+  }, []);
   async function logoutHandler() {
     let sure = window.confirm("Are you sure?");
     if (sure) {
@@ -45,9 +48,9 @@ const Profile = () => {
           }
         />
       </h2>
-      <div className="flex flex-col gap-2">
-        <h2>Name: {userData.name}</h2>
-        <h2>Email: {userData.email}</h2>
+      <div>
+        {profile === "singer" && <SingerProfile />}
+        {profile === "user" && <UserProfile />}
       </div>
       <button
         className="mt-2 bg-red-500 p-2 rounded-lg"

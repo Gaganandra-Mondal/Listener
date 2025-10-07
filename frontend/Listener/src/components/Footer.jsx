@@ -69,7 +69,7 @@ const Footer = ({
 
       {/* Footer */}
       <footer
-        className={`bg-${theme.background} text-${theme.text} border-t border-white/5 rounded-t-xl shadow-inner px-3 py-3 md:px-4 flex flex-col md:flex-row items-center justify-between gap-3 sticky bottom-0 left-0 right-0 z-50`}
+        className={`bg-${theme.background} text-${theme.text} border-t border-white/5 shadow-inner px-3 py-3 md:px-4 flex flex-col md:flex-row items-center justify-between gap-3 sticky bottom-0 left-0 right-0 z-50`}
       >
         {/* Track Info (👉 only this opens floating player) */}
         <div
@@ -128,9 +128,7 @@ const Footer = ({
         </div>
 
         {/* Volume */}
-        <div
-          className={`flex items-center gap-2 order-3 md:order-3 `}
-        >
+        <div className={`flex items-center gap-2 order-3 md:order-3 `}>
           <button className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center cursor-pointer">
             {mute ? (
               <FaVolumeOff onClick={muteHandler} />

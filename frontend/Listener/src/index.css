@@ -9,3 +9,7 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;             /* Chrome, Safari, Opera */
 }
+
+body {
+  background-color: rgb(255, 255, 255);
+}
