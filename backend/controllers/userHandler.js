@@ -7,7 +7,7 @@ const userHandler = async (req, res) => {
         // console.log(id);
         const { rows } = await pool.query("select id, name, email from users where id = $1", [id]);
         if (rows.length > 0) {
-            console.log(rows[0]);
+            // console.log(rows[0]);
             res.status(200).json({ message: rows[0] });
         } else {
             res.status(400).json({ message: "Bad Request." });

@@ -7,7 +7,7 @@ const searchHandler = async (req, res) => {
         if (!search) {
             return res.status(400).json({ message: "Bad Request" });
         }
-        console.log(search);
+        // console.log(search);
         let { rows } = await pool.query("select * from songs where name ilike $1", [`%${search}%`]);
         if (rows.length > 0) {
             // console.log(rows);
