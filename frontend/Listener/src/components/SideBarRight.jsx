@@ -21,7 +21,7 @@ const SideBarRight = ({ theme }) => {
   const themeClasses = getThemeClasses();
 
   return (
-    <aside className=" h-full w-full lg:w-64 relative">
+    <aside className=" w-full lg:w-64 relative">
       {/* Mobile Toggle */}
       <button
         className="lg:hidden flex items-center gap-2 text-white bg-red-600 px-4 py-3 rounded-lg mb-3 w-full justify-center z-40 relative"
@@ -45,7 +45,7 @@ const SideBarRight = ({ theme }) => {
               ? "fixed top-20 left-4 right-4 z-50 max-h-[80vh] overflow-y-auto"
               : "hidden"
           } 
-          lg:block lg:relative lg:top-0 lg:left-0 lg:right-0 lg:z-auto lg:max-h-none
+          lg:block lg:relative lg:top-0 lg:right-0 lg:h-full
         `}
       >
         {/* Close button for mobile */}
