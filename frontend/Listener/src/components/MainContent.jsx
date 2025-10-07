@@ -1,10 +1,14 @@
-// import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import Playing from "./Playing";
 // import { FaPause, FaPlay } from "react-icons/fa";
 
 const MainContent = () => {
-  let { theme, songToggle, songs } = useOutletContext();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const isSmall = screenWidth < 600;
+    
+    let { theme, songToggle, songs } = useOutletContext();
+
   // useEffect(() => {
   //   async function getSongs() {
   //     let response = await fetch("http://localhost:3333/");
@@ -58,7 +62,12 @@ const MainContent = () => {
 
   return (
     <main
-      className={`h-screen overflow-y-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`}
+      className={`h-screen overflow-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 min-h-[500px]`} 
+      style={{
+              maxHeight: isSmall ? "200px" : "250px",
+              scrollbarWidth: "thin",
+              scrollbarColor: "red transparent",
+            }}
     >
       {/* Modern Bento Grid */}
       <section className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 auto-rows-[120px] md:auto-rows-[140px] lg:auto-rows-[160px]">

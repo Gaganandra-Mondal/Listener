@@ -84,7 +84,7 @@ const App = () => {
   }
   return (
     <div
-      className={`min-h-screen min-w-screen bg-${theme.background} text-${theme.text} flex flex-col`}
+      className={`h-screen w-screen bg-${theme.background} text-${theme.text} flex flex-col`}
     >
       <NavBar
         theme={theme}

@@ -4,8 +4,9 @@ import Playing from "./Playing";
 
 const NewReleases = () => {
   let { theme, songToggle } = useOutletContext();
-
   let [songs, setSongs] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const isSmall = screenWidth < 600;
 
   useEffect(() => {
     async function getNewReleases() {
@@ -30,7 +31,11 @@ const NewReleases = () => {
   return (
     <main
       className={` h-screen overflow-y-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md 
-      p-4 md:p-6 overflow-y-auto min-h-[500px]`}
+      p-4 md:p-6 overflow-y-auto min-h-[500px]`} style={{
+        maxHeight: isSmall ? "200px" : "250px",
+        scrollbarWidth: "thin",
+        scrollbarColor: "red transparent",
+      }}
     >
       {/* Modern Bento Grid */}
       <section className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 auto-rows-[120px] md:auto-rows-[140px] lg:auto-rows-[160px]">
