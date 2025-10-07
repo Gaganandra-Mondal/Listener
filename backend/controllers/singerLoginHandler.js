@@ -10,12 +10,12 @@ const singerLoginHandler = async (req, res) => {
         email = email.toLowerCase();
         const user = await pool.query('select id,password from artists where email=$1;', [email]);
         if (user.rows.length <= 0) {
-            console.log("400");
+            // console.log("400");
             return res.status(401).json({ message: 'Invalid Credentials' });
         }
         const hashedPassword = await bcrypt.compare(password, user.rows[0].password);
         if (!hashedPassword) {
-            console.log("401");
+            // console.log("401");
             return res.status(401).json({ message: 'Invalid Credentials' });
         } else {
             // Set cookie

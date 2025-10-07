@@ -15,7 +15,7 @@ const UserViewSingerProfile = () => {
   const [playingSongId, setPlayingSongId] = useState(null);
   const [ArtistDetails, setArtistDetails] = useState({
     name: "",
-    img: "https://www.tottenhamhotspurstadium.com/media/xrhfsdgm/2v8a4968.jpg?width=960&height=582&rnd=133898957726470000",
+    img: "https://img.freepik.com/premium-vector/music-star-logo-microphone-emblem-talent-show_53562-20118.jpg?w=360",
     followers: 0,
   });
   const [mockArtist, setMockArtist] = useState([]);

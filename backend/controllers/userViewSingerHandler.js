@@ -5,7 +5,7 @@ const userViewSingerHandler = async (req, res) => {
     // this sends the singer details like name,image,followers count to the user interface
     try {
         const sid = req.params.sid;
-        console.log(sid);
+        // console.log(sid);
         if (!sid) {
             return res.status(400).json({ message: "Bad Request" });
         }
