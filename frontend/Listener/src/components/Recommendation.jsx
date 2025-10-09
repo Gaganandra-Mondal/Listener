@@ -32,13 +32,13 @@ const Recommendation = () => {
 
   return (
     <main
-      className={` h-screen overflow-y-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px]`} style={{
+      className={` h-screen overflow-y-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 rounded-xl shadow-md p-4 md:p-6 overflow-y-auto min-h-[500px] lg:min-h-[100%]`} style={{
         maxHeight: isSmall ? "200px" : "250px",
         scrollbarWidth: "thin",
         scrollbarColor: "red transparent",
       }}
     >
-      <section className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 auto-rows-[120px] md:auto-rows-[140px] lg:auto-rows-[160px]">
+      <section className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 auto-rows-[120px] md:auto-rows-[140px] lg:auto-rows-[160px] ">
         {songs?.map((song, i) => {
           // Define bento grid patterns
           const getCardSize = (index) => {
