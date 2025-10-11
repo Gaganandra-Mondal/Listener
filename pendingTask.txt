@@ -1,0 +1,6 @@
+1. Playlist build
+2. Song Upload for singers
+3. Like functionality
+4. Few More fixes 
+5. Testing
+6. Deploy

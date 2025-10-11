@@ -10,6 +10,7 @@ const App = () => {
   let [songToggle, setSongToggle] = useState({});
   let [songs, setSongs] = useState([]);
   let [currentSong, setCurrentSong] = useState({});
+  let [currentSongArray, setCurrentSongArray] = useState([]);
   useEffect(() => {
     async function getSongs() {
       try {
@@ -92,6 +93,7 @@ const App = () => {
         audioRef={audioRef}
         songToggle={songToggle}
         songPlay={songPlay}
+        currentSongArray={currentSongArray}
       />
       <div className="flex-1 flex flex-col lg:flex-row">
         <SideBarLeft
@@ -99,13 +101,24 @@ const App = () => {
           audioRef={audioRef}
           songToggle={songToggle}
           songPlay={songPlay}
+          currentSongArray={currentSongArray}
         />
-        <Outlet context={{ theme, audioRef, songToggle, songPlay, songs }} />
+        <Outlet
+          context={{
+            theme,
+            audioRef,
+            songToggle,
+            songPlay,
+            songs,
+            currentSongArray,
+          }}
+        />
         <SideBarRight
           theme={theme}
           audioRef={audioRef}
           songToggle={songToggle}
           songPlay={songPlay}
+          currentSongArray={currentSongArray}
         />
       </div>
       <Footer
@@ -115,8 +128,11 @@ const App = () => {
         songPlay={songPlay}
         songs={songs}
         currentSong={currentSong}
+        currentSongArray={currentSongArray}
       />
     </div>
+    // For now mostly few unused props are passed to few components at the
+    // final stage we will remove them
   );
 };
 

@@ -18,6 +18,7 @@ const UserViewSingerProfile = () => {
     img: "https://img.freepik.com/premium-vector/music-star-logo-microphone-emblem-talent-show_53562-20118.jpg?w=360",
     followers: 0,
   });
+  // This array is needed to build the play all for a particular singer
   const [mockArtist, setMockArtist] = useState([]);
 
   const handleFollow = async () => {
@@ -100,7 +101,7 @@ const UserViewSingerProfile = () => {
           return;
         }
         const data = await response.json();
-        // console.log(data.message);
+        console.log(data.message);
         setMockArtist(data.message);
       }
       getArtistDetails();
