@@ -59,18 +59,22 @@ const Discover = () => {
                 contentSize: "text-sm",
               },
               // Pattern 3: Mixed sizes
-              {
-                colSpan: "col-span-1 row-span-2",
-                contentSize: "text-md",
-              },
+              // {
+              //   colSpan: "col-span-1 row-span-2",
+              //   contentSize: "text-md",
+              // },
               {
                 colSpan: "col-span-1 row-span-1",
                 contentSize: "text-sm",
               },
               {
-                colSpan: "col-span-2 row-span-1",
-                contentSize: "text-md",
+                colSpan: "col-span-1 row-span-1",
+                contentSize: "text-sm",
               },
+              // {
+              //   colSpan: "col-span-2 row-span-1",
+              //   contentSize: "text-md",
+              // },
             ];
             return patterns[index % patterns.length];
           };
