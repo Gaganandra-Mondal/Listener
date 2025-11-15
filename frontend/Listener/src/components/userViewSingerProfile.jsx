@@ -9,7 +9,14 @@ import {
 import { useOutletContext, useParams } from "react-router-dom";
 
 const UserViewSingerProfile = () => {
-  let { theme, songToggle, songPlay } = useOutletContext();
+  let {
+    theme,
+    songToggle,
+    songPlay,
+    setCurrentSongArray,
+    songs,
+    setCurrentSong,
+  } = useOutletContext();
   const { sid } = useParams();
   const [isFollowing, setIsFollowing] = useState(false);
   const [playingSongId, setPlayingSongId] = useState(null);
@@ -65,7 +72,23 @@ const UserViewSingerProfile = () => {
 
   const handlePlayAll = () => {
     setPlayingSongId("all");
-    setTimeout(() => setPlayingSongId(null), 1500);
+    let playlist = [];
+    for (let i of songs) {
+      for (let j of mockArtist) {
+        if (i.url === j.url) {
+          playlist.push(i);
+        }
+      }
+    }
+    setCurrentSongArray(playlist);
+    setCurrentSong(playlist[0]);
+    setTimeout(() => {
+      setPlayingSongId(null);
+      // console.log(mockArtist);
+      if (playlist.length > 0) {
+        songPlay(playlist[0].url); // play from that playlist
+      }
+    }, 1200);
   };
 
   const handlePlaySong = (id) => {
@@ -101,7 +124,7 @@ const UserViewSingerProfile = () => {
           return;
         }
         const data = await response.json();
-        console.log(data.message);
+        // console.log(data.message);
         setMockArtist(data.message);
       }
       getArtistDetails();

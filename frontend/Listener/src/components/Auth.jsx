@@ -18,13 +18,13 @@ const Auth = () => {
       </Link>
 
       {/* Singer Login */}
-      <Link
+      {/* <Link
         to="/singerlogin"
         className="flex flex-col justify-center items-center gap-2 hover:text-red-400 transition-colors"
       >
         <FaMicrophone className="text-4xl" />
         <h2 className="text-center">Singer</h2>
-      </Link>
+      </Link> */}
     </main>
   );
 };

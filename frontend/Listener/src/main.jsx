@@ -76,14 +76,14 @@ const router = createBrowserRouter([
     path: "userregister",
     element: <UserRegister />,
   },
-  {
-    path: "singerlogin",
-    element: <SingerLogin />,
-  },
-  {
-    path: "singerregister",
-    element: <SingerRegister />,
-  },
+  // {
+  //   path: "singerlogin",
+  //   element: <SingerLogin />,
+  // },
+  // {
+  //   path: "singerregister",
+  //   element: <SingerRegister />,
+  // },
 ]);
 createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
