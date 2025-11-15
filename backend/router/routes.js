@@ -27,6 +27,7 @@ import userViewSingerHandler from "../controllers/userViewSingerHandler.js";
 import userViewSingerHandler2 from "../controllers/userViewSingerHandler2.js";
 import searchHandler from "../controllers/searchHandler.js";
 import checkFollowHandler from "../controllers/checkFollowHandler.js";
+import playlistHandler from "../controllers/playlistHandler.js";
 import sessionHandler from "../middlewares/sessionHandler.js";
 
 const router = Router();
@@ -71,6 +72,8 @@ router.post("/unfollows/:id", verifier, unfollowHandler);
 router.post("/search", searchHandler);
 
 router.get("/isFollowing/:sid", verifier, checkFollowHandler);
+
+router.get("/playlists", verifier, playlistHandler);
 
 router.get("/sessionCheck", sessionHandler);
 
