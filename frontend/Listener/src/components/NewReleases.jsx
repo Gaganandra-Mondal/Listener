@@ -1,6 +1,7 @@
 import { useOutletContext, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Playing from "./Playing";
+import toast from 'react-hot-toast'
 
 const NewReleases = () => {
   let { theme, songToggle } = useOutletContext();
@@ -14,15 +15,29 @@ const NewReleases = () => {
         const response = await fetch("http://localhost:3333/newReleases");
         if (!response.ok) {
           const data = await response.json();
-          alert(data.message);
+          toast('Login to listen new released songs !', {
+            duration: 3500,
+            position: 'top-center',
+            style: {
+              background: 'crimson',
+              color: 'white'
+            },
+          });
           return;
         } else {
           const data = await response.json();
           setSongs(data.message);
         }
       } catch (err) {
-        console.log(err.message);
-        alert(err.message);
+        // console.log(err.message);
+        toast(err.message, {
+          duration: 3500,
+          position: 'top-center',
+          style: {
+            background: 'crimson',
+            color: 'white'
+          },
+        });
       }
     }
     getNewReleases();

@@ -1,6 +1,7 @@
 import { useOutletContext, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Playing from "./Playing";
+import toast from 'react-hot-toast'
 
 const Discover = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -16,7 +17,15 @@ const Discover = () => {
         });
         if (!response.ok) {
           let data = await response.json();
-          alert(data.message + " Login First");
+          toast('Login to discover more songs !', {
+            duration: 3500,
+            position: 'top-center',
+            style: {
+              background: 'crimson',
+              color: 'white'
+            },
+          });
+
           return;
         }
         const data = await response.json();
@@ -24,8 +33,15 @@ const Discover = () => {
       }
       getRecomendations();
     } catch (err) {
-      console.log(err.message);
-      alert(err.message);
+      // console.log(err.message);
+      toast(err.message, {
+        duration: 3500,
+        position: 'top-center',
+        style: {
+          background: 'crimson',
+          color: 'white'
+        },
+      });
     }
   }, []);
 
