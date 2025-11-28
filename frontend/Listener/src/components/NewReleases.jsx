@@ -15,7 +15,7 @@ const NewReleases = () => {
         const response = await fetch("http://localhost:3333/newReleases");
         if (!response.ok) {
           const data = await response.json();
-          toast('Login to listen new released songs !', {
+          toast('No new released songs !', {
             duration: 3500,
             position: 'top-center',
             style: {
