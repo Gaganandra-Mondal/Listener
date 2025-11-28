@@ -18,19 +18,50 @@ const App = () => {
         let response = await fetch("http://localhost:3333/");
         let data = await response.json();
         setSongs(data.message);
+        // console.log(data.message[0]);
+        setCurrentSongArray(data.message);
       } catch (error) {
         console.error("Error fetching songs:", error);
         setSongs([]);
+        setCurrentSongArray([]);
       }
     }
     getSongs();
+  }, []);
+
+  function handleEnded() {
+    console.log("ended");
+    const index = currentSongArray.findIndex((s) => s.url === currentSong.url);
+    if (index === currentSongArray.length - 1) {
+      songPlay(currentSongArray[0].url);
+    } else {
+      songPlay(currentSongArray[index + 1].url);
+    }
+  }
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    // function handleTimeUpdate() {
+    //   console.log("Current time:", audio.currentTime);
+    // }
+
+    // Attach listeners
+    audio.addEventListener("ended", handleEnded);
+    // audio.addEventListener("timeupdate", handleTimeUpdate);
+
+    // Cleanup on unmount
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+      // audio.removeEventListener("timeupdate", handleTimeUpdate);
+    };
   }, []);
 
   function songPlay(url) {
     // Stop any currently playing audio
     if (!audioRef.current) return;
 
-    for (let song of songs) {
+    for (let song of currentSongArray) {
       if (song.url === url) {
         // console.log("Found song:", song);
         setCurrentSong(song);
@@ -39,7 +70,7 @@ const App = () => {
     }
 
     if (audioRef.current.src === url && !audioRef.current.paused) {
-      console.log("Same");
+      // console.log("Same");
       audioRef.current.pause();
       setSongToggle((prev) => {
         return {
@@ -86,7 +117,7 @@ const App = () => {
   }
   return (
     <div
-      className={`h-screen w-screen bg-${theme.background} text-${theme.text} flex flex-col`}
+      className={`h-screen w-screen bg-${theme.background} text-${theme.text} flex flex-col overflow-y-auto`}
     >
       <NavBar
         theme={theme}
@@ -95,6 +126,8 @@ const App = () => {
         songToggle={songToggle}
         songPlay={songPlay}
         currentSongArray={currentSongArray}
+        setCurrentSongArray={setCurrentSongArray}
+        setCurrentSong={setCurrentSong}
       />
       <div className="flex-1 flex flex-col lg:flex-row">
         <SideBarLeft
@@ -103,6 +136,8 @@ const App = () => {
           songToggle={songToggle}
           songPlay={songPlay}
           currentSongArray={currentSongArray}
+          setCurrentSongArray={setCurrentSongArray}
+          setCurrentSong={setCurrentSong}
         />
         <Outlet
           context={{
@@ -112,6 +147,8 @@ const App = () => {
             songPlay,
             songs,
             currentSongArray,
+            setCurrentSongArray,
+            setCurrentSong,
           }}
         />
         <SideBarRight
@@ -120,6 +157,8 @@ const App = () => {
           songToggle={songToggle}
           songPlay={songPlay}
           currentSongArray={currentSongArray}
+          setCurrentSongArray={setCurrentSongArray}
+          setCurrentSong={setCurrentSong}
         />
       </div>
       <Footer
@@ -130,6 +169,8 @@ const App = () => {
         songs={songs}
         currentSong={currentSong}
         currentSongArray={currentSongArray}
+        setCurrentSongArray={setCurrentSongArray}
+        setCurrentSong={setCurrentSong}
       />
     <Toaster/>
     </div>

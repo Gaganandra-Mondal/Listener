@@ -9,7 +9,14 @@ const Song = () => {
   let [song, setSong] = useState({});
   let [isLoading, setIsLoading] = useState(true);
   let [error, setError] = useState(null);
-  let { theme, songToggle, songPlay } = useOutletContext();
+  let {
+    theme,
+    songToggle,
+    songPlay,
+    setCurrentSongArray,
+    songs,
+    setCurrentSong,
+  } = useOutletContext();
 
   // Track screen width for responsive design
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -201,7 +208,18 @@ const Song = () => {
 
         {/* Play Button */}
         <button
-          onClick={() => songPlay(song.url)}
+          onClick={() => {
+            setCurrentSongArray(songs);
+            let currSong = {};
+            for (let i of songs) {
+              if (i.url === song.url) {
+                currSong = i;
+                break;
+              }
+            }
+            setCurrentSong(currSong);
+            songPlay(song.url);
+          }}
           className={`
             bg-[#ff1744] rounded-full flex items-center justify-center text-white cursor-pointer
             transition-all duration-200 ease-in-out hover:scale-105 active:scale-95

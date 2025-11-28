@@ -9,7 +9,7 @@ import {
   FaSync,
 } from "react-icons/fa";
 import { useState } from "react";
-import FloatingPlayer from "./FloatingPlayer";
+// import FloatingPlayer from "./FloatingPlayer";
 
 const Footer = ({
   theme,
@@ -18,32 +18,33 @@ const Footer = ({
   songToggle,
   currentSong,
   songs,
+  currentSongArray,
 }) => {
   const [mute, setMute] = useState(false);
-  const [showPlayer, setShowPlayer] = useState(false);
+  // const [showPlayer, setShowPlayer] = useState(false);
 
   function backwardHandler() {
     // console.log(audioRef.current.currentTime);
-    let currentIndex = -1;
-    for (let song of songs) {
-      if (song.url === audioRef.current.src) {
-        currentIndex = songs.indexOf(song);
-        break;
-      }
-    }
-    currentIndex = currentIndex === 0 ? songs.length - 1 : currentIndex;
-    console.log("Current Index:", songs[currentIndex]);
-    songPlay(songs[currentIndex - 1].url);
+    let currentIndex = currentSongArray.findIndex(
+      (s) => s.url === currentSong.url
+    );
+    currentIndex =
+      currentIndex === 0 ? currentSongArray.length - 1 : currentIndex;
+    // console.log("Current Index:", currentSongArray[currentIndex]);
+    songPlay(currentSongArray[currentIndex - 1].url);
+    // console.log(currentSong);
   }
 
   function forwardHandler() {
     // console.log(audioRef.current.currentTime);
     // audioRef.current.currentTime += 10;
-    let currentIndex = songs.indexOf(currentSong);
-    if (currentIndex === songs.length - 1) {
-      songPlay(songs[0].url);
+    let currentIndex = currentSongArray.findIndex(
+      (s) => s.url === currentSong.url
+    );
+    if (currentIndex === currentSongArray.length - 1) {
+      songPlay(currentSongArray[0].url);
     } else {
-      songPlay(songs[currentIndex + 1].url);
+      songPlay(currentSongArray[currentIndex + 1].url);
     }
   }
 
@@ -55,7 +56,7 @@ const Footer = ({
   return (
     <>
       {/* Floating Player Component */}
-      {showPlayer && (
+      {/* {showPlayer && (
         <FloatingPlayer
           theme={theme}
           control={songToggle[audioRef.current.src]}
@@ -65,7 +66,7 @@ const Footer = ({
           setMute={setMute}
           onClose={() => setShowPlayer(false)}
         />
-      )}
+      )} */}
 
       {/* Footer */}
       <footer
