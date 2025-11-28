@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { HiMenu, HiX, HiSearch } from "react-icons/hi";
 import { NavLink, Link } from "react-router-dom";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { FaSun, FaMoon, FaUser } from "react-icons/fa";
 
 const NavBar = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -238,12 +238,8 @@ const NavBar = ({ theme, toggleTheme }) => {
         </button>
         {session ? (
           <Link to="/profile">
-            <div
-              className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition`}
-            >
-              {profile}
-            </div>
-          </Link>
+            <FaUser color="red-600" size={30}/>
+          </Link> 
         ) : (
           <Link to="/auth">Login</Link>
         )}
@@ -275,7 +271,7 @@ const NavBar = ({ theme, toggleTheme }) => {
         </button>
 
         <button
-          className={`text-${theme.text} text-xl`}
+          className={`text-${theme.text} text-red-600 text-3xl`}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <HiX /> : <HiMenu />}
@@ -320,13 +316,10 @@ const NavBar = ({ theme, toggleTheme }) => {
             </Link>
           ))}
           {session ? (
-            <Link to="/profile">
-              <div
-                className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-semibold shadow-md cursor-pointer hover:scale-110 transition`}
-              >
-                {profile}
-              </div>
-            </Link>
+            <Link className="text-red-600 flex flex-col items-center" to="/profile">
+            <FaUser size={40}/>
+            <h1 className="font-bold">Profile</h1>
+          </Link> 
           ) : (
             <Link to="/auth">Login</Link>
           )}
