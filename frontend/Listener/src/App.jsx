@@ -4,6 +4,7 @@ import SideBarRight from "./components/SideBarRight";
 import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const audioRef = useRef(new Audio());
@@ -130,6 +131,7 @@ const App = () => {
         currentSong={currentSong}
         currentSongArray={currentSongArray}
       />
+    <Toaster/>
     </div>
     // For now mostly few unused props are passed to few components at the
     // final stage we will remove them

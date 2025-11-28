@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useOutletContext } from "react-router-dom";
 import { FaPause, FaPlay, FaHeart } from "react-icons/fa";
+import toast from 'react-hot-toast'
 
 const Song = () => {
   let [liked, setLiked] = useState(false);
@@ -28,7 +29,16 @@ const Song = () => {
         if (response.ok) {
           const data = await response.json();
           setSong(data.message);
-        } else { alert("Failed to fetch song data.");}
+        } else {
+          toast('Failed to fetch song !', {
+            duration: 3500,
+            position: 'top-center',
+            style: {
+              background: 'crimson',
+              color: 'white'
+            },
+          });
+        }
       } catch (error) {
         console.error("Error fetching song:", error.message);
         setError(error.message);
@@ -98,7 +108,7 @@ const Song = () => {
 
   return (
     <div
-      className={`rounded-3xl bg-${theme.background} text-${theme.text} relative shadow-2xl`}
+      className={`h-screen overflow-y-auto flex-1 bg-${theme.background} text-${theme.text} border border-white/5 shadow-md p-4 md:p-6 max-h-[580px]`}
       style={{
         width: "100%",
         maxWidth: "900px",
@@ -107,30 +117,19 @@ const Song = () => {
         padding: isSmall
           ? "1.5rem 1rem"
           : isMedium
-          ? "2rem 1.5rem"
-          : "2.5rem 2rem",
+            ? "2rem 1.5rem"
+            : "2.5rem 2rem",
         scrollbarWidth: "thin",
         scrollbarColor: "red transparent",
       }}
     >
-      {/* Main Content */}
-      <div
-        className={`flex ${
-          isSmall ? "flex-col items-center text-center" : "flex-row items-start"
-        } gap-6 mb-6`}
-      >
-        {/* Album Art */}
+      {/* Album Art */}
         {song.img && (
           <div className={`flex-shrink-0 ${isSmall ? "mb-4" : ""}`}>
             <img
               src={song.img}
               alt={song.name}
-              className={`rounded-xl border-2 border-red-900 shadow-lg object-cover transition-transform hover:scale-105`}
-              style={{
-                width: `${albumSize}px`,
-                height: `${albumSize}px`,
-                minWidth: `${albumSize}px`,
-              }}
+              className={`w-[100%] lg:w-150 h-50 lg:h-70 m-auto rounded-xl shadow-lg object-stretch`}
               onError={(e) => {
                 e.target.src =
                   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjMkQyRDJEIi8+CjxwYXRoIGQ9Ik04MCA2MEgxMjBWODBIMzBWMTQwSDEyMFYxNjBIODBWMTQwSDEyMFY4MFY2MFoiIGZpbGw9IiM1RTVFNjQiLz4KPC9zdmc+";
@@ -138,38 +137,36 @@ const Song = () => {
             />
           </div>
         )}
+      {/* Main Content */}
+      <div
+        className={`flex ${isSmall ? "flex-col items-center text-center" : "flex-row items-start"
+          } gap-6 mb-6`}
+      >
 
         {/* Song Info */}
-        <div className={`flex-1 ${isSmall ? "w-full" : ""}`}>
-          <div className="text-xs text-[#ff3b3b] tracking-wider font-semibold opacity-80 mb-1">
-            SONG
-          </div>
-
+        <div className={`flex-1 flex flex-col justify-center gap-1 items-center ${isSmall ? "w-full" : ""}`}>
           <h1
-            className={`font-bold text-${theme.text} ${
-              isSmall
-                ? "text-2xl mb-2"
-                : isMedium
-                ? "text-3xl mb-2"
-                : "text-4xl mb-3"
-            } leading-tight break-words`}
+            className={`font-bold text-${theme.text} ${isSmall
+              ? "text-2xl"
+              : isMedium
+                ? "text-3xl"
+                : "text-4xl"
+              } leading-tight break-words`}
           >
             {song.name || "Unknown Song"}
           </h1>
 
           <h2
-            className={`text-[#999] font-medium ${
-              isSmall ? "text-lg mb-3" : "text-xl mb-4"
-            } leading-tight`}
+            className={`text-[#999] font-medium ${isSmall ? "text-lg" : "text-x"
+              } leading-tight`}
           >
             {song.aname || "Unknown Artist"}
           </h2>
 
           {song.genre && (
             <div
-              className={`inline-block bg-[rgba(255,59,59,0.1)] text-[#ff3b3b] font-semibold px-3 py-1 rounded-full ${
-                isSmall ? "text-sm" : "text-base"
-              }`}
+              className={`inline-block bg-[rgba(255,59,59,0.1)] text-[#ff3b3b] font-semibold px-3 py-1 rounded-full ${isSmall ? "text-sm" : "text-base"
+                }`}
             >
               {song.genre}
             </div>
@@ -179,9 +176,8 @@ const Song = () => {
 
       {/* Action Buttons */}
       <div
-        className={`flex justify-between items-center ${
-          isSmall ? "flex-col-reverse gap-4" : "flex-row"
-        } mb-6`}
+        className={` flex-0.5 flex lg:w-[50%] m-auto justify-between items-center ${isSmall ? "flex-col-reverse gap-4" : "flex-row"
+          } mb-6`}
       >
         {/* Love Button */}
         <button
@@ -197,9 +193,8 @@ const Song = () => {
           }}
         >
           <FaHeart
-            className={`transition-colors duration-200 ${
-              liked ? "text-[#ff3b3b] fill-current" : "text-white fill-current"
-            }`}
+            className={`transition-colors duration-200 ${liked ? "text-[#ff3b3b] fill-current" : "text-white fill-current"
+              }`}
             style={{ fontSize: "2em" }}
           />
         </button>
@@ -231,12 +226,7 @@ const Song = () => {
             LYRICS
           </div>
           <div
-            className={`text-${theme.text} opacity-80 leading-relaxed overflow-y-auto custom-scrollbar`}
-            style={{
-              maxHeight: isSmall ? "300px" : "400px",
-              fontSize: isSmall ? "0.9rem" : "1rem",
-              lineHeight: "1.8",
-            }}
+            className={`text-${theme.text} opacity-80 leading-relaxed`}
           >
             <div className="whitespace-pre-line font-light">{song.lyrics}</div>
           </div>
